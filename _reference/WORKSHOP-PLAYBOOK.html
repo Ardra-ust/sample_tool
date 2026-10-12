@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UST AI Factory — Workshop SOP Playbook</title>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      securityLevel: "strict",
+      themeVariables: {
+        primaryColor: "#e8eef6",
+        primaryTextColor: "#102033",
+        primaryBorderColor: "#1f4e79",
+        lineColor: "#1f4e79",
+        secondaryColor: "#f4efe4",
+        tertiaryColor: "#ffffff",
+        fontFamily: "IBM Plex Sans, Segoe UI, sans-serif"
+      }
+    });
+  </script>
+  <style>
+    :root {
+      --ink: #102033;
+      --muted: #4a5b6b;
+      --navy: #1f4e79;
+      --navy-dark: #132f4a;
+      --gold: #b8860b;
+      --paper: #f7f4ee;
+      --card: #fffdf8;
+      --line: #d9d0c3;
+      --gate: #8b1e1e;
+      --ok: #1f6b3a;
+      --chip: #e8eef6;
+      --sidebar: #0f2438;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font: 16px/1.55 "IBM Plex Sans", "Segoe UI", sans-serif;
+    }
+    a { color: var(--navy); }
+    .layout { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+    nav.toc {
+      position: sticky; top: 0; height: 100vh; overflow: auto;
+      background: var(--sidebar); color: #e8eef6; padding: 1.25rem 1rem 2rem;
+    }
+    nav.toc h1 { font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 0.75rem; color: #f0d78c; }
+    nav.toc input {
+      width: 100%; padding: 0.45rem 0.6rem; border: 0; border-radius: 4px;
+      margin-bottom: 0.9rem; background: #1a3a57; color: #fff;
+    }
+    nav.toc a { color: #d5e4f2; text-decoration: none; display: block; padding: 0.22rem 0.35rem; border-radius: 4px; font-size: 0.86rem; }
+    nav.toc a:hover, nav.toc a.active { background: #1f4e79; color: #fff; }
+    nav.toc .g { margin-top: 0.85rem; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #8aa4bb; }
+    main { padding: 2rem 2.4rem 4rem; max-width: 1080px; }
+    header.cover {
+      background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+      color: #fff; padding: 2.2rem 2rem; border-radius: 10px; margin-bottom: 1.6rem;
+    }
+    header.cover .kicker { color: #f0d78c; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.78rem; }
+    header.cover h1 { margin: 0.35rem 0 0.4rem; font-size: 2rem; line-height: 1.2; }
+    header.cover p { margin: 0; max-width: 46rem; color: #dbe7f3; }
+    header.cover code { background: transparent; color: inherit; padding: 0; }
+    h2 { margin-top: 2.4rem; padding-top: 0.4rem; border-top: 2px solid var(--line); color: var(--navy-dark); }
+    h3 { color: var(--navy); }
+    h4 { margin-bottom: 0.4rem; }
+    table { border-collapse: collapse; width: 100%; background: var(--card); font-size: 0.92rem; margin: 0.7rem 0 1.1rem; }
+    th, td { border: 1px solid var(--line); padding: 0.45rem 0.55rem; vertical-align: top; text-align: left; }
+    th { background: var(--chip); }
+    code, kbd { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.88em; background: #efe8d8; padding: 0.05em 0.3em; border-radius: 3px; }
+    pre { background: #0f2438; color: #e8eef6; padding: 0.9rem 1rem; overflow: auto; border-radius: 8px; font-size: 0.84rem; }
+    pre code { background: none; color: inherit; padding: 0; }
+    .callout { border-left: 4px solid var(--navy); background: var(--card); padding: 0.7rem 0.9rem; margin: 0.9rem 0; }
+    .callout.gate { border-color: var(--gate); }
+    .callout.ok { border-color: var(--ok); }
+    .callout.gold { border-color: var(--gold); }
+    .callout strong.label { display: block; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.2rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.5rem 0 1rem; }
+    .chip { background: var(--chip); border: 1px solid #c5d4e4; border-radius: 999px; padding: 0.15rem 0.55rem; font-size: 0.8rem; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 0.9rem 1rem; }
+    ol.sop > li { margin: 0.45rem 0; }
+    .mermaid { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 0.8rem; margin: 0.8rem 0 1.2rem; overflow: auto; }
+    .cmd { scroll-margin-top: 1rem; }
+    footer.meta { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; }
+    main { min-width: 0; }
+    @media (max-width: 720px) {
+      .layout { grid-template-columns: 1fr; }
+      nav.toc { position: relative; height: auto; max-height: 42vh; }
+      .grid2 { grid-template-columns: 1fr; }
+      main { padding: 1.2rem; }
+    }
+    @media print {
+      nav.toc { display: none; }
+      .layout { grid-template-columns: 1fr; }
+      header.cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      a { text-decoration: none; color: inherit; }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc" id="toc">
+  <h1>Workshop SOP</h1>
+  <input id="filter" type="search" placeholder="Filter sections…" aria-label="Filter sections" />
+  <div class="g">Start here</div>
+  <a href="#cover">Cover</a>
+  <a href="#how-to-use">How to use this book</a>
+  <a href="#folder">What is in workshop/</a>
+  <a href="#model">Orchestration model</a>
+  <a href="#defaults">Default Java / Next.js stack</a>
+  <div class="g">Catalogs</div>
+  <a href="#agents">Primary agents</a>
+  <a href="#subagents">Subagents</a>
+  <a href="#rules">Rules</a>
+  <a href="#skills">Skills</a>
+  <a href="#templates">Templates</a>
+  <a href="#hooks">Hooks, config, evals</a>
+  <div class="g">Command flows</div>
+  <a href="#spine">12-command spine</a>
+  <a href="#cmd-generate-brd">1. generate-brd</a>
+  <a href="#cmd-propose-architecture">2. propose-architecture</a>
+  <a href="#cmd-plan-sprint">3. plan-sprint</a>
+  <a href="#cmd-generate-ui-design">4. generate-ui-design</a>
+  <a href="#cmd-implement-api">5. implement-api</a>
+  <a href="#cmd-implement-ui">6. implement-ui</a>
+  <a href="#cmd-expand-test-coverage">7. expand-test-coverage</a>
+  <a href="#cmd-run-tests">8. run-tests</a>
+  <a href="#cmd-run-eval">9. run-eval</a>
+  <a href="#cmd-close-eval-gaps">10. close-eval-gaps</a>
+  <a href="#cmd-review-changes">11. review-changes</a>
+  <a href="#cmd-application-summary">12. application-summary</a>
+  <div class="g">Extend the factory</div>
+  <a href="#generic-agent">Create a generic agent</a>
+  <a href="#custom">Sample: swap a stack</a>
+  <a href="#python">Sample: Python</a>
+  <a href="#kotlin">Sample: Kotlin</a>
+  <a href="#twins">Cursor / Claude / Copilot twins</a>
+  <a href="#labs">Facilitator labs</a>
+  <a href="#sources">Source index</a>
+</nav>
+<main>
+<header class="cover" id="cover">
+  <div class="kicker">Standard operating procedure · Playbook</div>
+  <h1>UST AI Factory Workshop</h1>
+  <p>Self-contained field manual: starter kits, worksheets, factory anatomy, the 12-command spine, every agent and subagent that ships, and how to add a generic agent (Python and Kotlin are worked samples) without breaking orchestration.</p>
+  <p style="margin-top:0.7rem;color:#f0d78c;font-size:0.9rem;">Default stack: Java 21 / Spring Boot 3 + Next.js / TypeScript. Catalog lock: 12 primary agents.</p>
+</header>
+
+<section id="how-to-use">
+  <h2>1. How to use this book</h2>
+  <p>This is the operator SOP for the workshop package. Read it as a playbook, not as marketing. Every behavior below is taken from the files named in <a href="#sources">Source index</a>. Where two files disagree, the live command contract wins over a summary table.</p>
+  <div class="grid2">
+    <div class="card">
+      <h4>If you are a participant</h4>
+      <ol>
+        <li>Pick one IDE kit (Cursor, Claude Code, or Copilot).</li>
+        <li>Copy the kit into a product repo using that kit’s README.</li>
+        <li>Fill <code>config.yaml</code> from the worksheet — placeholders are a hard stop.</li>
+        <li>Run the 12-command spine. Stop at every human gate.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h4>If you are extending the stack</h4>
+      <ol>
+        <li>Treat Java + Next.js as the shipped default, not the only possible stack.</li>
+        <li>Prefer a <strong>mode + subagent</strong> on <code>backend-agent</code> / <code>frontend-agent</code> over a 13th primary.</li>
+        <li>Update the command contract, rule, skill, <code>stack-conventions.md</code>, <code>scope.yaml</code>, and all three IDE twins together.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="callout gate">
+    <strong class="label">Hard rule</strong>
+    Never invent business behavior, API fields, DDL columns, UI copy, or error semantics. Cite a source or register <code>ASSUMPTION-&lt;id&gt;</code> / Open DQ. Agents cannot self-approve BRD, sprint plan, or test-package gates.
+  </div>
+</section>
+
+<section id="folder">
+  <h2>2. What is exactly in <code>workshop/</code></h2>
+  <p>The workshop is a portable training bundle: factory anatomy, worksheets, and three IDE starter kits that share the same <strong>12-command spine</strong>.</p>
+  <table>
+    <thead><tr><th>Path</th><th>What it is</th><th>What it is not</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>workshop/factory-anatomy/</code></td>
+        <td>Structure blueprints: how to author an agent, subagent, command, Copilot prompt, skill, rule, hook, and artifact. Teaching files only.</td>
+        <td>Not a live catalog of agents. Do not copy these templates into a product repo and expect commands to appear.</td>
+      </tr>
+      <tr>
+        <td><code>workshop/worksheets/</code></td>
+        <td>Hands-on setup guides: <code>config-yaml-checklist.md</code> and <code>scope-yaml-guide.md</code>.</td>
+        <td>Not product requirements. Fill them before any implement command.</td>
+      </tr>
+      <tr>
+        <td><code>workshop/starter-kits/cursor/</code></td>
+        <td>Drop-in <code>.cursor/</code> + <code>.cursorrules</code> + hooks, evals, scripts, harness blanks.</td>
+        <td>Not a product app. Copy into a participant repo before running commands.</td>
+      </tr>
+      <tr>
+        <td><code>workshop/starter-kits/claude/</code></td>
+        <td>Same 12-command spine under <code>.claude/</code> + <code>CLAUDE.md</code>.</td>
+        <td>Path prefixes differ (<code>.claude/commands</code>, <code>.claude/agents</code>). Behavior must stay twin-parity.</td>
+      </tr>
+      <tr>
+        <td><code>workshop/starter-kits/copilot/</code></td>
+        <td>Same spine as GitHub Copilot prompts: <code>.github/prompts/*.prompt.md</code>, agents, instructions, subagents.</td>
+        <td>No IDE runtime hooks. Artifact checks run via git pre-commit.</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="mermaid">
+flowchart TB
+  W["workshop/"]
+  FA["factory-anatomy/\nblueprints only"]
+  WS["worksheets/\nconfig + scope"]
+  SK["starter-kits/"]
+  C["cursor/"]
+  L["claude/"]
+  P["copilot/"]
+  W --> FA
+  W --> WS
+  W --> SK
+  SK --> C
+  SK --> L
+  SK --> P
+  C --> Spine["12-command spine\nJava 21 + Next.js default"]
+  L --> Spine
+  P --> Spine
+  </div>
+  <h3>Factory anatomy files (copy these when you author a new piece)</h3>
+  <table>
+    <thead><tr><th>File</th><th>Use when you are creating</th></tr></thead>
+    <tbody>
+      <tr><td><code>agent-template.md</code></td><td>A primary agent (<code>*-agent.md</code>)</td></tr>
+      <tr><td><code>subagent-template.md</code></td><td>A specialist that returns structured IO + confidence</td></tr>
+      <tr><td><code>command-template.md</code></td><td>A Cursor/Claude slash command playbook</td></tr>
+      <tr><td><code>prompt-template.md</code></td><td>The Copilot twin <code>.prompt.md</code></td></tr>
+      <tr><td><code>copilot-agent-frontmatter-template.md</code></td><td>Copilot primary <code>.agent.md</code> YAML only</td></tr>
+      <tr><td><code>skill-template.md</code></td><td>Reusable procedure under <code>skills/&lt;name&gt;/SKILL.md</code></td></tr>
+      <tr><td><code>rule-template.md</code></td><td>Always-on or glob-scoped governance</td></tr>
+      <tr><td><code>hook-template.md</code></td><td>Runtime or git invariant</td></tr>
+      <tr><td><code>artifact-template.md</code></td><td>A versioned output scaffold</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="model">
+  <h2>3. Orchestration model</h2>
+  <p>Every public slash command is a playbook. Humans invoke the command. The orchestrator loads the contract and delegates. Primaries own a domain. Subagents do bounded work and return IO + confidence. Subagents are never slash-command primaries.</p>
+  <pre>Slash command
+  → orchestrator-agent          (route, gates, loop max 3, Next command)
+    → primary agent             (owns the domain)
+      → subagent(s)             (bounded task, structured IO, confidence)
+        → artifacts/audit/...   (every public command)
+        → harness-updater       (phase-changing commands only)</pre>
+  <div class="mermaid">
+flowchart LR
+  U[Operator types /command] --> O[orchestrator-agent]
+  O --> R{Required inputs\nand human gates?}
+  R -->|refuse| N[Tell Next command]
+  R -->|ok| P[Primary agent]
+  P --> S[Subagent chain]
+  S --> V[Validate DoD]
+  V -->|pass iteration 1| A[Audit + optional harness]
+  V -->|findings| P
+  V -->|iteration 3 fail| E[Escalate with gaps]
+  A --> N
+  </div>
+  <div class="callout">
+    <strong class="label">Loop policy</strong>
+    Build/quality commands: Plan → Act → Validate → Refine. Intake/architecture: Plan → Act → Observe → Reflect. Max 3 is a ceiling. If iteration 1 Validate/Observe passes, stop. Do not burn remaining iterations.
+  </div>
+  <h3>Piece types — do not mix them</h3>
+  <table>
+    <thead><tr><th>Piece</th><th>Job</th><th>Invoked by</th></tr></thead>
+    <tbody>
+      <tr><td>Command / prompt</td><td>Public spine step the operator types</td><td>Human</td></tr>
+      <tr><td>Primary agent</td><td>Owns a domain and SoD boundary</td><td>Orchestrator, by explicit name</td></tr>
+      <tr><td>Subagent</td><td>Bounded specialist; returns confidence</td><td>Parent primary</td></tr>
+      <tr><td>Skill</td><td>Reusable procedure the command says to load</td><td>Command or agent</td></tr>
+      <tr><td>Rule</td><td>Always-on or glob invariant</td><td>IDE / always-on loader</td></tr>
+      <tr><td>Template</td><td>Artifact scaffold (empty structure, no invented domain)</td><td>Agent filling an output</td></tr>
+      <tr><td>Hook</td><td>Hard allow/deny at runtime or git</td><td>IDE hook or pre-commit</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="defaults">
+  <h2>4. Default stack that ships in starter kits</h2>
+  <p>Starter kits are a <strong>Java + Next.js factory</strong>. That is the default audience path. To add Python or Kotlin, follow the paths later in this playbook and update the command contracts so orchestrator still routes correctly.</p>
+  <div class="chips">
+    <span class="chip">API: Java 21 / Spring Boot 3</span>
+    <span class="chip">UI: Next.js App Router / TypeScript</span>
+    <span class="chip">Contract: OpenAPI</span>
+    <span class="chip">DB migrations: Flyway + JPA</span>
+    <span class="chip">API tests: JUnit 5 + JaCoCo</span>
+    <span class="chip">UI tests: Vitest + Playwright</span>
+  </div>
+  <table>
+    <thead><tr><th>Layer</th><th>Default primary</th><th>Default stack subagents (shipped in kit)</th><th>Governing rule</th><th>Skills</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>API implementation</td>
+        <td><code>backend-agent</code> mode <code>java</code></td>
+        <td><code>spring-module-generator</code>, <code>spring-test-generator</code>, <code>validation-chain-generator</code>, <code>schema-migration-generator</code>, <code>api-test-runner</code></td>
+        <td><code>03-backend-springboot</code></td>
+        <td><code>api</code>, <code>jacoco-coverage</code>, <code>validation-chain</code>, <code>migration</code></td>
+      </tr>
+      <tr>
+        <td>UI implementation</td>
+        <td><code>frontend-agent</code></td>
+        <td><code>mockup-to-component</code>, <code>next-component-generator</code>, <code>ui-test-runner</code>, <code>e2e-scenario-writer</code></td>
+        <td><code>04-frontend-nextjs</code></td>
+        <td><code>playwright-e2e</code>, <code>ui-design-from-reference</code></td>
+      </tr>
+      <tr>
+        <td>UI mockup</td>
+        <td><code>frontend-agent</code> mode <code>design-mockup</code></td>
+        <td><code>reference-site-capturer</code>, <code>ui-design-brief-writer</code>, <code>ui-mockup-generator</code></td>
+        <td><code>04</code></td>
+        <td><code>ui-design-from-reference</code></td>
+      </tr>
+      <tr>
+        <td>Contract</td>
+        <td><code>api-agent</code></td>
+        <td><code>api-contract-designer</code></td>
+        <td><code>05-api-contracts</code></td>
+        <td><code>api</code></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Layering the kit expects for Java, from <code>docs/architecture/stack-conventions.md</code>:</p>
+  <pre>modules/api
+  controller/   REST, validation, ResponseEntity
+  service/      business logic, transactions
+  repository/   JPA
+  dto/          request/response (names match OpenAPI)
+  entity/       JPA entities
+  mapper/       MapStruct or manual
+  db/migration/ Flyway versioned SQL
+
+modules/ui
+  app/          App Router pages
+  components/   presentational + containers
+  lib/api/      typed client generated from OpenAPI</pre>
+  <div class="callout gold">
+    <strong class="label">Implement note</strong>
+    The kit is <strong>agent-owned</strong> Java/Next.js. There is no J2 <code>java_master_templates/</code> render pipeline and no <code>tools/templates/render_check.py</code> in kit Definition of Done.
+  </div>
+</section>
+
+<section id="agents">
+  <h2>5. Primary agents in the starter kit</h2>
+  <p>Each primary lives at <code>.cursor/agents/&lt;name&gt;.md</code> (Claude: <code>.claude/agents/</code>, Copilot: <code>.github/agents/&lt;name&gt;.agent.md</code>). Catalogs are flat — no <code>api/</code> or <code>backend/</code> folders.</p>
+  <table>
+    <thead><tr><th>Agent</th><th>Owns</th><th>Must NOT</th><th>Kit commands</th></tr></thead>
+    <tbody>
+      <tr><td><code>orchestrator-agent</code></td><td>Route every command; enforce gates and max-3 loop; write orchestrator audit; announce Next command; walk eval fix-queue</td><td>Write product code; write <code>docs/harness/**</code> (only harness-updater); self-approve gates</td><td>All, plus primary of <code>/close-eval-gaps</code></td></tr>
+      <tr><td><code>requirements-agent</code></td><td>Transcript → structured BRD</td><td>Approve BRD; invent uncited FR/BR; write user stories</td><td><code>/generate-brd</code></td></tr>
+      <tr><td><code>planner-agent</code></td><td>Accepted BRD → Proposed sprint plan with implement-* rows</td><td>Start execution; invent DDL/API; self-approve the plan</td><td><code>/plan-sprint</code></td></tr>
+      <tr><td><code>backend-agent</code></td><td>API module; contract sync with api-agent; tests run. Default mode: <code>java</code>. Add mode <code>python</code> when you follow the Python path.</td><td>Write UI; change BR meaning; skip tests; embed secrets</td><td><code>/implement-api</code>, plus scripts on <code>/run-tests</code></td></tr>
+      <tr><td><code>frontend-agent</code></td><td>UI module + required FE↔BE wiring gate. Mode <code>design-mockup</code> for mockups</td><td>Write API business logic; skip wiring; invent microcopy; ship React from design-mockup</td><td><code>/generate-ui-design</code>, <code>/implement-ui</code></td></tr>
+      <tr><td><code>api-agent</code></td><td>OpenAPI design (gate 1) and OpenAPI↔DTO verify (gate 2)</td><td>Implement controllers; silent redesign during implement</td><td>Internal to <code>/implement-api</code></td></tr>
+      <tr><td><code>data-agent</code></td><td>Additive schema/DDL when persistence changes</td><td>DROP without quoted story AC</td><td>Internal to <code>/implement-api</code> (mode <code>ddl</code>)</td></tr>
+      <tr><td><code>quality-agent</code></td><td>Coordinate expand, run-tests, run-eval; write test-package as Pending Approval</td><td>Write product tests; lower gates; self-approve the package; run eval-agent from expand</td><td><code>/expand-test-coverage</code>, <code>/run-tests</code>, <code>/run-eval</code></td></tr>
+      <tr><td><code>test-agent</code></td><td>Case bodies + matrix (design on expand); scripts/run after package Approved</td><td>Invent AC; fabricate counts; write the BR coverage file</td><td>Called from expand, implement-*, run-tests</td></tr>
+      <tr><td><code>security-agent</code></td><td>OWASP / secrets review of the slice on <code>/review-changes</code></td><td>Write exploits; mark compliant without evidence; scan third-party production</td><td><code>/review-changes</code></td></tr>
+      <tr><td><code>code-review-agent</code></td><td>Read-then-report review vs standards and AC</td><td>Mutate source while reviewing</td><td><code>/review-changes</code></td></tr>
+      <tr><td><code>documentation-agent</code></td><td>Application summary; architecture proposals (mode <code>architecture</code>)</td><td>Implement features; invent NFRs; mark ADRs Accepted</td><td><code>/propose-architecture</code>, <code>/application-summary</code></td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <strong class="label">Mapping note</strong>
+    <code>KIT-SCOPE.md</code> lists <code>/propose-architecture</code> primary as <code>planner-agent</code>. The live command contract routes <code>orchestrator-agent → documentation-agent (mode architecture)</code>. Follow the command file.
+  </div>
+</section>
+
+<section id="subagents">
+  <h2>6. Subagents in the starter kit (39)</h2>
+  <p>Specialists live in <code>.cursor/subagents/</code>. Parents reject output below the quality gate (max 3). Only <code>harness-updater</code> writes <code>docs/harness/**</code>. Only <code>br-coverage-validator</code> writes <code>docs/test-cases-br-coverage.md</code>.</p>
+  <h3>Default-stack specialists (Java / Next.js)</h3>
+  <table>
+    <thead><tr><th>Subagent</th><th>Parent</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>spring-module-generator</code></td><td>backend-agent</td><td>Agent-owned Spring layers per stack-conventions</td></tr>
+      <tr><td><code>spring-test-generator</code></td><td>backend-agent</td><td>Agent-owned JUnit per stack-conventions</td></tr>
+      <tr><td><code>validation-chain-generator</code></td><td>backend-agent</td><td>Spring ValidationRule + unit tests when cited BRs change</td></tr>
+      <tr><td><code>schema-migration-generator</code></td><td>data-agent</td><td>Additive Flyway + JPA alignment</td></tr>
+      <tr><td><code>api-test-runner</code></td><td>backend / test</td><td>Run API unit tests + JaCoCo; write evidence</td></tr>
+      <tr><td><code>next-component-generator</code></td><td>frontend-agent</td><td>UX/mockup → Next pages/components/hooks</td></tr>
+      <tr><td><code>mockup-to-component</code></td><td>frontend-agent</td><td>PNG / screenshot → layout for next-component-generator</td></tr>
+      <tr><td><code>ui-test-runner</code></td><td>frontend-agent</td><td>Run UI unit/e2e; write evidence</td></tr>
+      <tr><td><code>playwright-codegen</code></td><td>test-agent</td><td>Approved package → Playwright specs, POM, fixtures, data</td></tr>
+      <tr><td><code>playwright-self-healer</code></td><td>test-agent</td><td>Suggest locator updates; never auto-merge</td></tr>
+    </tbody>
+  </table>
+  <h3>Intake, plan, architecture, design</h3>
+  <table>
+    <thead><tr><th>Subagent</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>transcript-analyzer</code></td><td>Raw transcript → cited facts, conflicts, quotes</td></tr>
+      <tr><td><code>supporting-doc-synthesizer</code></td><td>PDFs, spreadsheets, mockups → fact table</td></tr>
+      <tr><td><code>open-questions-cataloger</code></td><td>Conflicts, gaps, TBDs → DQ-xxx register</td></tr>
+      <tr><td><code>brd-writer</code></td><td>Assemble draft BRD from intake + synthesis</td></tr>
+      <tr><td><code>gap-identifier</code></td><td>Gaps across stories / UX / API / data / wiring</td></tr>
+      <tr><td><code>sprint-planner</code></td><td>Traceability + capacity → backlog</td></tr>
+      <tr><td><code>requirement-traceability-mapper</code></td><td>FR/BR vs code/tests matrix</td></tr>
+      <tr><td><code>tech-stack-advisor</code></td><td>Questionnaire item → Recommendation + Rationale + Alternatives (Java+Next defaults)</td></tr>
+      <tr><td><code>architecture-proposal-writer</code></td><td>Proposal + Proposed ADRs + topology stub</td></tr>
+      <tr><td><code>reference-site-capturer</code></td><td>Capture viewport screenshot of reference_url</td></tr>
+      <tr><td><code>ui-design-brief-writer</code></td><td>Capture + sprint AC → layout/color/typography brief</td></tr>
+      <tr><td><code>ui-mockup-generator</code></td><td>Brief + capture → feature mockup PNG</td></tr>
+    </tbody>
+  </table>
+  <h3>Quality, eval, review, docs</h3>
+  <table>
+    <thead><tr><th>Subagent</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>test-intake-normalizer</code></td><td>Classify expand inputs; scan untrusted files; write intake manifest</td></tr>
+      <tr><td><code>test-case-generator</code></td><td>AC/OpenAPI/FR/BR → case bodies + matrix index (no scripts)</td></tr>
+      <tr><td><code>automation-companion-author</code></td><td>Designed automation case bodies with full steps</td></tr>
+      <tr><td><code>tc-traceability-mapper</code></td><td>Build <code>docs/test-matrix.md</code></td></tr>
+      <tr><td><code>tc-completeness-validator</code></td><td>Every in-scope FR/BR has a case or Blocked row</td></tr>
+      <tr><td><code>tc-step-quality-validator</code></td><td>Fail boilerplate steps and generic error codes</td></tr>
+      <tr><td><code>bdd-scenario-expander</code></td><td>Expand Gherkin into deterministic data</td></tr>
+      <tr><td><code>br-coverage-validator</code></td><td>Only writer of <code>docs/test-cases-br-coverage.md</code>; stamps PASS/FAIL</td></tr>
+      <tr><td><code>e2e-scenario-writer</code></td><td>Author Playwright specs from journeys</td></tr>
+      <tr><td><code>coverage-analyzer</code></td><td>Parse JaCoCo/Jest; risky gaps</td></tr>
+      <tr><td><code>e2e-defect-analyzer</code></td><td>Failure summary, likely root cause, suggested resolution</td></tr>
+      <tr><td><code>eval-agent</code></td><td>Product evals, completeness ledger, fix-queue. Does not patch product</td></tr>
+      <tr><td><code>security-reviewer</code></td><td>Diff OWASP / secrets / auth review</td></tr>
+      <tr><td><code>api-contract-designer</code></td><td>Stories → OpenAPI/GraphQL + errors</td></tr>
+      <tr><td><code>application-summary-writer</code></td><td>HTML/PDF summary with fresh metrics</td></tr>
+      <tr><td><code>audit-trail-writer</code></td><td>Normalize What/Why/How/Validation/Open Items/Next command</td></tr>
+      <tr><td><code>harness-updater</code></td><td>Only writer of <code>progress.md</code> and append-only <code>decisions.md</code></td></tr>
+    </tbody>
+  </table>
+  <div class="callout gold">
+    <strong class="label">Python</strong>
+    To generate Python instead of Spring, author <code>python-code-generator</code> from <code>factory-anatomy/subagent-template.md</code> and wire it as in <a href="#python">Python path</a>.
+  </div>
+</section>
+
+<section id="rules">
+  <h2>7. Rules shipped in starter kits (20)</h2>
+  <p>Cursor: <code>.cursor/rules/*.mdc</code>. Claude: <code>.claude/rules/*.mdc</code>. Copilot: <code>.github/instructions/*.instructions.md</code>.</p>
+  <table>
+    <thead><tr><th>Rule</th><th>Purpose</th><th>Apply</th></tr></thead>
+    <tbody>
+      <tr><td><code>00-global-governance</code></td><td>Production-grade defaults; Open DQ instead of invention</td><td>always</td></tr>
+      <tr><td><code>01-project-context</code></td><td>Read config.yaml; refuse product code while placeholders remain</td><td>always</td></tr>
+      <tr><td><code>02-security-and-compliance</code></td><td>No secrets; OWASP; mask PII</td><td>always</td></tr>
+      <tr><td><code>03-backend-springboot</code></td><td><strong>Default Java stack.</strong> Controller→service→repository; agent-owned Spring</td><td>globs <code>modules/api/**</code></td></tr>
+      <tr><td><code>04-frontend-nextjs</code></td><td><strong>Default UI stack.</strong> App Router; typed client; wiring gate</td><td>globs <code>**/*.ts(x)</code></td></tr>
+      <tr><td><code>05-api-contracts</code></td><td>OpenAPI alignment</td><td>contract paths</td></tr>
+      <tr><td><code>07-testing-and-quality</code></td><td>Cases + matrix; coverage PASS; package Approved before run-tests</td><td>always</td></tr>
+      <tr><td><code>08-documentation-traceability</code></td><td>Rule → story → API → test → evidence</td><td>docs</td></tr>
+      <tr><td><code>09-agent-orchestration</code></td><td>Command spine and SoD</td><td>always</td></tr>
+      <tr><td><code>10-audit-trail</code></td><td>Audit path; harness-updater for phase-changing commands</td><td>always</td></tr>
+      <tr><td><code>11-intake-planning-governance</code></td><td>BRD Accepted; plan Approved; test-package Approved</td><td>always</td></tr>
+      <tr><td><code>13-business-analysis-invest</code></td><td>Story / AC quality</td><td>planning</td></tr>
+      <tr><td><code>14-data-migration-integrity</code></td><td>DDL when data-agent runs</td><td>migrations</td></tr>
+      <tr><td><code>15-release-readiness</code></td><td>review-changes readiness</td><td>review</td></tr>
+      <tr><td><code>17-test-results-logging</code></td><td>Structured test logs</td><td>test results</td></tr>
+      <tr><td><code>21-api-endpoint-validation</code></td><td>Live API evidence</td><td>live probes</td></tr>
+      <tr><td><code>22-behavior-provenance-and-anti-invention</code></td><td>behavior_id + source locator on every non-trivial behavior</td><td>always</td></tr>
+      <tr><td><code>23-test-generation</code></td><td>Test design quality; no heuristic bulk generators</td><td>test design</td></tr>
+      <tr><td><code>31-untrusted-intake</code></td><td>Intake safety scan before BRD / untrusted expand</td><td>always</td></tr>
+      <tr><td><code>cursor-factory-governance</code> / kit-governance</td><td>Always-on kit spine reminder</td><td>always</td></tr>
+    </tbody>
+  </table>
+  <p>When you enable a Python module, add rule <code>27-python-engineering</code> as shown in the Python path.</p>
+</section>
+
+<section id="skills">
+  <h2>8. Skills shipped in starter kits (14)</h2>
+  <p>Each skill is <code>skills/&lt;name&gt;/SKILL.md</code>. Commands name the skills they load. Skills are procedures, not agents.</p>
+  <table>
+    <thead><tr><th>Skill</th><th>When to load</th></tr></thead>
+    <tbody>
+      <tr><td><code>intake-safety</code></td><td>Before <code>/generate-brd</code> and untrusted expand inputs. Interpret scan exit codes.</td></tr>
+      <tr><td><code>brd-authoring</code></td><td><code>/generate-brd</code> — structured BRD, no invented requirements.</td></tr>
+      <tr><td><code>architecture-proposal</code></td><td><code>/propose-architecture</code> Q&amp;A and Proposed ADRs.</td></tr>
+      <tr><td><code>plan-as-input</code></td><td>Whenever a governed/sprint plan or story artifact is supplied. Resolve before ask.</td></tr>
+      <tr><td><code>planning</code></td><td><code>/plan-sprint</code> — Accepted BRD → execute rows only.</td></tr>
+      <tr><td><code>ui-design-from-reference</code></td><td><code>/generate-ui-design</code> — website URL + SP screen → mockup PNG.</td></tr>
+      <tr><td><code>api</code></td><td>Contract-first design and OpenAPI↔DTO sync on implement-api.</td></tr>
+      <tr><td><code>migration</code></td><td>Additive DDL during implement-api. No destructive cutover in this kit.</td></tr>
+      <tr><td><code>validation-chain</code></td><td>ValidationRule chains when cited BRs change.</td></tr>
+      <tr><td><code>jacoco-coverage</code></td><td>Java API line/branch coverage. Default-stack skill — replace or twin for Kotlin/Python coverage tools.</td></tr>
+      <tr><td><code>quality</code></td><td>Coordinate expand / run-tests / run-eval. Start local stack before E2E.</td></tr>
+      <tr><td><code>br-coverage</code></td><td>100% FR/BR coverage in designed cases. Used across plan, implement, expand, eval, review.</td></tr>
+      <tr><td><code>playwright-e2e</code></td><td>Live UI journeys against a healthy stack.</td></tr>
+      <tr><td><code>eval-suite</code></td><td>Completeness ledger + fix-queue → <code>/close-eval-gaps</code>.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="templates">
+  <h2>9. Templates</h2>
+  <p>Templates are empty scaffolds. Agents fill them from cited sources. They must not pre-fill invented domain values or stamp human gates as Approved. Kit path: <code>.cursor/templates/</code> (68 files plus README).</p>
+  <div class="grid2">
+    <div class="card">
+      <h4>Intake and plan</h4>
+      <p><code>brd-template</code>, <code>transcript-intake-notes-template</code>, <code>discussion-coverage-matrix-template</code>, <code>sprint-plan-template</code>, <code>requirement-traceability-template</code>, <code>tech-stack-questionnaire-template</code>, <code>architecture-proposal-template</code>, <code>adr-template</code>, <code>plan-as-input-protocol</code></p>
+    </div>
+    <div class="card">
+      <h4>API / UI implement</h4>
+      <p><code>api-contract-template</code>, <code>backend-rest-orchestration-pattern</code>, <code>feature-note-template</code>, <code>ui-spec-template</code>, <code>ui-design-brief-template</code>, <code>ui-mockup-manifest-template</code>, <code>code-generation-dos-donts</code></p>
+    </div>
+    <div class="card">
+      <h4>Test and eval</h4>
+      <p><code>test-cases-template</code>, <code>test-matrix-template</code>, <code>test-cases-br-coverage-template</code>, <code>br-tc-taxonomy</code>, <code>generic-step-denylist</code>, <code>test-package-review-template</code>, <code>playwright-spec-template</code>, <code>page-object-template</code>, <code>eval-results-template</code>, <code>eval-fix-log-template</code></p>
+    </div>
+    <div class="card">
+      <h4>Loops and audits</h4>
+      <p><code>plan-act-validate-refine-loop</code>, <code>plan-act-observe-reflect-loop</code>, <code>ooda-self-heal-loop</code>, <code>audit-trail-template</code>, <code>behavior-provenance-template</code>, <code>application-summary-template</code>, <code>code-review-template</code></p>
+    </div>
+  </div>
+  <p>Some templates (KPI scorecards, cutover, threat-profile, SLO) are present in the kit but are not used by the 12-command spine.</p>
+</section>
+
+<section id="hooks">
+  <h2>10. Hooks, config, scope, evals, scripts</h2>
+  <h3>Config (worksheet)</h3>
+  <p>Copy <code>config.yaml.example</code> → <code>config.yaml</code> and replace every <code>&lt;placeholder&gt;</code>. Orchestrator refuses product code while <code>&lt;project-name&gt;</code> remains (rule 01). Minimum bindings:</p>
+  <ul>
+    <li><code>project.name</code>, <code>project.domain</code></li>
+    <li><code>modules.api</code>, <code>modules.ui</code>, <code>modules.openapi</code></li>
+    <li><code>evals.rule_source</code> (Accepted BRD path after generate-brd)</li>
+    <li><code>evals.test_commands.api / ui / e2e</code> (kit defaults: Maven, npm test, Playwright)</li>
+    <li><code>local_stack.*</code> health URLs and start/verify/stop scripts</li>
+    <li><code>pipeline.eval_fix_command: close-eval-gaps</code> — do not remove</li>
+  </ul>
+  <h3>scope.yaml</h3>
+  <p>Mechanical write allowlists. Orchestrator may only write <code>artifacts/audit/**</code>. Implementers must not write <code>docs/test-cases-br-coverage.md</code> or <code>docs/harness/**</code>. When you add Kotlin/Python roots, add them to <code>backend-agent.write</code> and keep UI denied.</p>
+  <h3>Hooks</h3>
+  <ul>
+    <li><code>scaffold-from-command.mjs</code> — create sprint/audit folders on known commands (<code>failClosed: false</code>)</li>
+    <li><code>verify-artifacts.mjs</code> — artifact policy (<code>failClosed: true</code> on commit/push)</li>
+    <li><code>.githooks/pre-commit</code> → <code>tools/check-artifacts.mjs</code></li>
+  </ul>
+  <h3>Scripts the spine actually runs</h3>
+  <table>
+    <thead><tr><th>Script</th><th>Used by</th></tr></thead>
+    <tbody>
+      <tr><td><code>scripts/intake-safety-scan.py</code></td><td><code>/generate-brd</code>, untrusted expand. Exit 2 stop; exit 1 stop until redaction/waiver; exit 0 continue</td></tr>
+      <tr><td><code>tools/design/capture-reference.py</code></td><td><code>/generate-ui-design</code> URL capture</td></tr>
+      <tr><td><code>scripts/run-local-stack.sh</code> + <code>verify-stack-health.sh</code></td><td><code>/run-tests</code> Phase 0b before Playwright</td></tr>
+      <tr><td><code>scripts/stop-local-stack.sh</code></td><td>Tear down local API+UI</td></tr>
+    </tbody>
+  </table>
+  <h3>Evals</h3>
+  <p><strong>Product evals</strong> (<code>evals/product/</code>) run via <code>/run-eval</code> against the participant application. <strong>Factory meta-evals</strong> (<code>evals/factory/</code>) grade the kit itself (catalog lock, SoD, no self-approve, orchestrator writes no product code, test-case-before-script). Facilitators run factory evals after editing agents or commands.</p>
+</section>
+
+<section id="spine">
+  <h2>11. The 12-command spine</h2>
+  <pre>/generate-brd
+  → /propose-architecture          (satellite; does not block plan)
+  → /plan-sprint                   (stop until Approved)
+  → /generate-ui-design  ∥  /implement-api
+  → /implement-ui
+  → /expand-test-coverage          (stop until test-package Approved)
+  → /run-tests
+  → /run-eval
+  → /close-eval-gaps               (inner loop until auto_fix clear)
+  → /review-changes
+  → /application-summary</pre>
+  <div class="mermaid">
+flowchart TD
+  BRD["/generate-brd"] --> GATE1["Human: BRD Accepted"]
+  ARCH["/propose-architecture"] -.-> PLAN["/plan-sprint"]
+  GATE1 --> PLAN
+  PLAN --> GATE2["Human: plan Approved"]
+  GATE2 --> UID["/generate-ui-design"]
+  GATE2 --> API["/implement-api"]
+  UID --> UI["/implement-ui"]
+  API --> UI
+  UI --> EXP["/expand-test-coverage"]
+  EXP --> GATE3["Human: test-package Approved"]
+  GATE3 --> RUN["/run-tests"]
+  RUN --> EVAL["/run-eval"]
+  EVAL --> FIX["/close-eval-gaps"]
+  FIX --> EVAL
+  EVAL --> REV["/review-changes"]
+  REV --> SUM["/application-summary"]
+  </div>
+  <div class="callout gate">
+    <strong class="label">Human gates — agents cannot pass these</strong>
+    <ol>
+      <li>After <code>/generate-brd</code>: BRD status <strong>Accepted</strong> (or dated waiver in <code>docs/harness/decisions.md</code>).</li>
+      <li>After <code>/plan-sprint</code>: plan status <strong>Approved</strong> before any implement-* or generate-ui-design.</li>
+      <li>After <code>/expand-test-coverage</code>: <code>docs/quality/test-package-review.md</code> <strong>Approved</strong> before <code>/run-tests</code>.</li>
+      <li>Completeness ledger + <code>auto_fix</code> closed or <code>needs_human</code> before <code>/review-changes</code>.</li>
+    </ol>
+  </div>
+  <p>Phase-changing commands (must call harness-updater): generate-brd, plan-sprint, implement-api, implement-ui, expand-test-coverage, run-tests, run-eval, close-eval-gaps, review-changes, application-summary. Satellites with audit only: propose-architecture, generate-ui-design.</p>
+</section>
+
+<!-- ========== COMMANDS ========== -->
+<article class="cmd" id="cmd-generate-brd">
+  <h2>Command 1 — /generate-brd</h2>
+  <p><strong>Objective.</strong> Structured BRD from transcripts and supporting docs. Does not write user stories. Output stays <strong>Draft — Pending Domain Review</strong>.</p>
+  <p><strong>Primary:</strong> requirements-agent. <strong>Loop:</strong> Plan → Act → Observe → Reflect.</p>
+  <div class="mermaid">
+flowchart TD
+  O[orchestrator-agent] --> SCAN["intake-safety-scan.py"]
+  SCAN -->|exit 2| STOP[STOP]
+  SCAN -->|exit 1| REDACT[STOP until redaction or waiver]
+  SCAN -->|exit 0| REQ[requirements-agent]
+  REQ --> T[transcript-analyzer]
+  T --> S[supporting-doc-synthesizer]
+  S --> Q[open-questions-cataloger]
+  Q --> B[brd-writer]
+  B --> H[harness-updater]
+  H --> NEXT["Next: wait for domain review then /plan-sprint"]
+  </div>
+  <table>
+    <thead><tr><th>Required</th><th>Skills</th><th>Templates</th><th>Rules</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Transcript path(s)</td>
+        <td>intake-safety, brd-authoring</td>
+        <td>transcript-intake-notes, brd-template, discussion-coverage-matrix, audit-trail</td>
+        <td>11, 10, 09, 22, 31</td>
+      </tr>
+    </tbody>
+  </table>
+  <p><strong>Outputs:</strong> <code>artifacts/intake/&lt;date&gt;-intake-notes.md</code>, <code>artifacts/brd/&lt;module&gt;-BRD-draft.md</code>, audit. <strong>Next command:</strong> <code>/plan-sprint</code> only after Accepted (or waiver).</p>
+</article>
+
+<article class="cmd" id="cmd-propose-architecture">
+  <h2>Command 2 — /propose-architecture</h2>
+  <p><strong>Objective.</strong> Tech-stack Q&amp;A → architecture proposal + Proposed ADRs. Satellite: does <strong>not</strong> block plan or implement. Does not emit DDL, OpenAPI fields, or product code. ADRs stay Proposed — humans Accept them.</p>
+  <p><strong>Primary:</strong> documentation-agent mode <code>architecture</code>. Recommended default presented to the operator: <strong>Java + Next.js</strong>.</p>
+  <div class="mermaid">
+flowchart TD
+  O[orchestrator-agent] --> D["documentation-agent\nmode architecture"]
+  D --> Q[open-questions-cataloger]
+  Q --> A[tech-stack-advisor]
+  A --> W[architecture-proposal-writer]
+  W --> OUT["proposal + ADRs + logical-layers.mmd\naudit only — no harness row"]
+  OUT --> NEXT["Next: /generate-brd or /plan-sprint"]
+  </div>
+  <p><strong>Outputs:</strong> <code>docs/architecture/&lt;date&gt;-architecture-proposal.md</code>, ADR files, questionnaire log, diagram. Copy suggested <code>config.yaml</code> bindings from the proposal by hand.</p>
+</article>
+
+<article class="cmd" id="cmd-plan-sprint">
+  <h2>Command 3 — /plan-sprint</h2>
+  <p><strong>Objective.</strong> Accepted BRD → sprint backlog tagged implement-api / implement-ui. Gap analysis is an internal step, not a public command. Output is <strong>Proposed — Pending Approval</strong>.</p>
+  <div class="mermaid">
+flowchart TD
+  O[orchestrator-agent] --> GATE{BRD Accepted\nor waiver?}
+  GATE -->|no| REFUSE["Refuse → finish domain review"]
+  GATE -->|yes| P[planner-agent mode sprint]
+  P --> G[gap-identifier]
+  G --> S[sprint-planner]
+  S --> T[requirement-traceability-mapper]
+  T --> Q[open-questions-cataloger]
+  Q --> H[harness-updater]
+  H --> WAIT["STOP until human sets Approved"]
+  WAIT --> NEXT["Next: /implement-api after Approval"]
+  </div>
+  <p><strong>Required:</strong> BRD path, sprint ID, goal, duration. <strong>Skills:</strong> plan-as-input, planning. <strong>Outputs:</strong> <code>artifacts/sprints/&lt;id&gt;-gap-report.md</code>, <code>&lt;id&gt;-plan.md</code>.</p>
+</article>
+
+<article class="cmd" id="cmd-generate-ui-design">
+  <h2>Command 4 — /generate-ui-design</h2>
+  <p><strong>Objective.</strong> Reference website URL + approved sprint screen → mockup PNG + design brief for implement-ui. Does not author requirements and does not ship production React.</p>
+  <p>If the operator already has a PNG, pass <code>screenshot_path</code> and skip live capture. This command does not extract a Figma design system.</p>
+  <div class="mermaid">
+flowchart TD
+  O[orchestrator-agent] --> GATE{Plan Approved?}
+  GATE -->|no| REFUSE[Refuse]
+  GATE -->|yes| F["frontend-agent\nmode design-mockup"]
+  F --> C[reference-site-capturer]
+  C --> B[ui-design-brief-writer]
+  B --> M[ui-mockup-generator]
+  M --> OUT["artifacts/design/*-mockup.png\nbrief + manifest JSON"]
+  OUT --> NEXT["Next: /implement-ui with mockup_path"]
+  </div>
+</article>
+
+<article class="cmd" id="cmd-implement-api">
+  <h2>Command 5 — /implement-api</h2>
+  <p><strong>Objective.</strong> One sprint item: schema (if needed) → OpenAPI → <strong>Spring</strong> → tests actually run. Does not write UI. Plan must be Approved.</p>
+  <p>This is the command you change when you add Python or Kotlin. Today Phase 3 is hard-wired to <code>spring-module-generator</code> and Phase 4c to <code>spring-test-generator</code>.</p>
+  <div class="mermaid">
+flowchart TD
+  O[orchestrator-agent] --> GATE{Plan Approved?}
+  GATE -->|no| REFUSE[Refuse]
+  GATE -->|yes| PLAN[Plan]
+  PLAN --> DDL{"Persistence\nchange?"}
+  DDL -->|yes| DATA["data-agent ddl +\nschema-migration-generator"]
+  DDL -->|no| API
+  DATA --> API["api-agent gate1 design\ngate2 OpenAPI↔DTO verify"]
+  API --> BE["backend-agent +\nspring-module-generator"]
+  BE --> VAL{"Cited validation\nBRs change?"}
+  VAL -->|yes| VC[validation-chain-generator]
+  VAL -->|no| TC
+  VC --> TC[test-case-generator]
+  TC --> BR[br-coverage-validator]
+  BR -->|FAIL| TC
+  BR -->|PASS| ST[spring-test-generator]
+  ST --> RUN[api-test-runner]
+  RUN --> AUDIT[audit + harness]
+  AUDIT --> NEXT["Next: /implement-ui"]
+  </div>
+  <p><strong>Skills:</strong> plan-as-input, api, jacoco-coverage, validation-chain, migration. <strong>Rules:</strong> 00, 02, 03, 05, 07, 09, 10, 14, 22, 23.</p>
+  <div class="callout">
+    <strong class="label">ASSUMPTION-PCC-002</strong>
+    Expand coverage PASS does not block this command. Slice cases + BR coverage + product tests still run here. Remaining FR/BR gap scripts belong to <code>/run-tests</code> after the expand package is Approved.
+  </div>
+</article>
+
+<article class="cmd" id="cmd-implement-ui">
+  <h2>Command 6 — /implement-ui</h2>
+  <p><strong>Objective.</strong> Mockup or UX spec → Next.js components → <strong>FE↔BE wiring (required gate)</strong> → UI/e2e tests. Wiring is not a public <code>/wire-*</code> command.</p>
+  <div class="mermaid">
+flowchart TD
+  O[orchestrator-agent] --> GATE{Plan Approved?}
+  GATE -->|no| REFUSE[Refuse]
+  GATE -->|yes| FE[frontend-agent]
+  FE --> M[mockup-to-component]
+  M --> N[next-component-generator]
+  N --> W["Wiring gate\ntyped client + docs/sprintN/wiring"]
+  W --> TC[test-case-generator]
+  TC --> E2E[e2e-scenario-writer if journey changed]
+  E2E --> BR[br-coverage-validator]
+  BR -->|PASS| UI[ui-test-runner]
+  UI --> NEXT["Next: /expand-test-coverage"]
+  </div>
+  <p>If the root cause is API-side, stop UI implement and route back to backend-agent. Do not paper over API bugs in the client.</p>
+</article>
+
+<article class="cmd" id="cmd-expand-test-coverage">
+  <h2>Command 7 — /expand-test-coverage</h2>
+  <p><strong>Objective.</strong> Close remaining FR/BR <em>design</em> gaps: case bodies, matrix, completeness, BR coverage gate. Stops at <strong>Pending Approval</strong>. Does not generate scripts, run suites, or eval.</p>
+  <div class="mermaid">
+flowchart TD
+  O[orchestrator-agent] --> Q[quality-agent]
+  Q --> IN{"Untrusted\nintake?"}
+  IN -->|yes| N[test-intake-normalizer + safety scan]
+  IN -->|no| C
+  N --> C[test-agent design + automation-companion-author]
+  C --> M[tc-traceability-mapper]
+  M --> V[tc-completeness-validator + tc-step-quality-validator]
+  V --> BR[br-coverage-validator]
+  BR -->|FAIL| C
+  BR -->|PASS| PKG["test-package-review.md\nPending Approval"]
+  PKG --> STOP["STOP — human Approves"]
+  STOP --> NEXT["Next: /run-tests"]
+  </div>
+  <p>Optional <code>--stop-after=design</code> skips the coverage gate and approval package. Agents Must NOT set Approval to Approved.</p>
+</article>
+
+<article class="cmd" id="cmd-run-tests">
+  <h2>Command 8 — /run-tests</h2>
+  <p><strong>Objective.</strong> Generate executable tests from an <strong>Approved</strong> package, run them, persist results, analyze defects, suggest locator heals. Order: JUnit/IT → Vitest → Playwright.</p>
+  <div class="mermaid">
+flowchart TD
+  O[orchestrator-agent] --> G{PASS + Approved?}
+  G -->|no| REFUSE[Refuse]
+  G -->|yes| STK["quality-agent\nrun-local-stack + verify-health"]
+  STK --> SCR["Scripts by execution_layer\napi/IT → backend + spring-test-generator\nuat → frontend / playwright-codegen"]
+  SCR --> EX["api-test-runner then ui-test-runner"]
+  EX --> COV[coverage-analyzer]
+  COV --> DEF[e2e-defect-analyzer]
+  DEF --> HEAL["playwright-self-healer\nsuggestion only"]
+  HEAL --> NEXT["Next: /run-eval"]
+  </div>
+  <p>Self-heal never auto-merges. Applying a heal requires an explicit human request. If the API is down for E2E, record environment FAIL — do not skip journeys as pass.</p>
+</article>
+
+<article class="cmd" id="cmd-run-eval">
+  <h2>Command 9 — /run-eval</h2>
+  <p><strong>Objective.</strong> Sole factory eval entry. Score coding, testing, and agent-output gaps against <code>evals.rule_source</code>. Emit completeness ledger and fix-queue. Silence (no case) is a finding, not a pass. Cannot waive P0/P1.</p>
+  <div class="mermaid">
+flowchart TD
+  O[orchestrator-agent] --> Q[quality-agent]
+  Q --> E["eval-agent\nincremental default"]
+  E --> L[completeness-ledger + fix-queue]
+  L --> AF{"auto_fix true\nopen?"}
+  AF -->|yes| C["Invoke /close-eval-gaps"]
+  C --> E
+  AF -->|no| NEXT["Next: /review-changes"]
+  </div>
+  <p>Incremental mode still includes always-on safety families L1-04, L1-05, L1-08, L1-09, L4-03. Missing ledger → review-changes will refuse.</p>
+</article>
+
+<article class="cmd" id="cmd-close-eval-gaps">
+  <h2>Command 10 — /close-eval-gaps</h2>
+  <p><strong>Objective.</strong> Inner loop of run-eval. Walk <code>fix-queue.json</code>: skip waived / needs_human, delegate <code>auto_fix: true</code> to owning agents, re-run those case_paths only. Max 3 attempts per item.</p>
+  <div class="mermaid">
+flowchart TD
+  O[orchestrator-agent] --> R[Read fix-queue.json]
+  R --> CL[Classify items]
+  CL -->|needs_human / waived| SKIP[Leave listed]
+  CL -->|auto_fix true| OWN["Owning agent:\nbackend / frontend / api /\nquality / documentation"]
+  OWN --> EV[eval-agent re-run those paths]
+  EV -->|green| CLOSED[closed]
+  EV -->|red| ATT{attempts under 3?}
+  ATT -->|yes| OWN
+  ATT -->|no| NH[needs_human]
+  CLOSED --> LOG[fix-log + audits]
+  NH --> LOG
+  SKIP --> LOG
+  LOG --> NEXT["Resume parent /run-eval"]
+  </div>
+</article>
+
+<article class="cmd" id="cmd-review-changes">
+  <h2>Command 11 — /review-changes</h2>
+  <p><strong>Objective.</strong> Read-only code, test, and security review of the slice. Does not run eval-agent. Missing completeness ledger → refuse.</p>
+  <div class="mermaid">
+flowchart TD
+  O[orchestrator-agent] --> LEDGER{Completeness\nledger present?}
+  LEDGER -->|no| REFUSE["Refuse → /run-eval"]
+  LEDGER -->|yes| CR[code-review-agent]
+  CR --> SEC[security-agent]
+  SEC --> SR[security-reviewer]
+  SR --> COV[coverage-analyzer]
+  COV --> BR[br-coverage-validator read]
+  BR --> OUT["artifacts/audit/date-review-changes.md"]
+  OUT -->|Approve| NEXT["Next: /application-summary"]
+  OUT -->|Block| FIX["Owning agents fix then re-review"]
+  </div>
+  <p>P0/P1 remaining on the ledger forces Block. A family with zero cases is Block, not Approve. Reviewer must not mutate source.</p>
+</article>
+
+<article class="cmd" id="cmd-application-summary">
+  <h2>Command 12 — /application-summary</h2>
+  <p><strong>Objective.</strong> Delivery summary with <em>fresh</em> metrics (not invented counts). Update harness via harness-updater.</p>
+  <div class="mermaid">
+flowchart TD
+  O[orchestrator-agent] --> DOC["documentation-agent\nmode summary"]
+  DOC --> W[application-summary-writer]
+  W --> H[harness-updater]
+  H --> A[audit-trail-writer]
+  A --> OUT["artifacts/application-summary.html\noptional PDF"]
+  OUT --> NEXT["Harness progress.md = Done"]
+  </div>
+  <p>Metrics must come from the latest JaCoCo / npm / Playwright / BR-coverage artifacts collected this run.</p>
+</article>
+
+<section id="generic-agent">
+  <h2>12. How to create a generic agent</h2>
+  <p>Use this procedure for any new specialist — not only a language swap. Python and Kotlin later in this playbook are <strong>worked samples</strong> of the same steps. Blueprints live in factory-anatomy (agent, subagent, command, Copilot prompt, skill, rule, hook, artifact).</p>
+  <h3>Choose the piece — do not mix types</h3>
+  <table>
+    <thead><tr><th>You need…</th><th>Create</th><th>Do not create</th></tr></thead>
+    <tbody>
+      <tr><td>A bounded task a primary already owns (parse, generate a layer, validate a file)</td><td>Subagent under <code>subagents/&lt;slug&gt;.md</code></td><td>A new primary or a public slash command</td></tr>
+      <tr><td>A reusable procedure several commands already call</td><td>Skill <code>skills/&lt;name&gt;/SKILL.md</code></td><td>A subagent that only restates the skill</td></tr>
+      <tr><td>A new operator-facing spine step</td><td>Command (and Copilot <code>.prompt.md</code> twin)</td><td>A primary that humans invoke directly</td></tr>
+      <tr><td>An always-on or glob invariant</td><td>Rule <code>.mdc</code> / Copilot <code>.instructions.md</code></td><td>A skill that agents can ignore</td></tr>
+      <tr><td>A domain no existing primary may own (SoD)</td><td>Primary <code>*-agent.md</code> plus catalog-lock update</td><td>A 13th primary when a <strong>mode</strong> on backend-agent or frontend-agent would suffice</td></tr>
+    </tbody>
+  </table>
+  <div class="mermaid">
+flowchart TD
+  Need[Need new behavior] --> Q1{Fits an existing primary?}
+  Q1 -->|yes, bounded task| SA[Author subagent from subagent-template.md]
+  Q1 -->|yes, reusable steps| SK[Author skill from skill-template.md]
+  Q1 -->|yes, new operator step| CMD[Author command from command-template.md]
+  Q1 -->|no, new SoD domain| PR[Author primary from agent-template.md]
+  SA --> WIRE[Wire Delegates + command phases + scope.yaml]
+  SK --> WIRE
+  CMD --> WIRE2[Route orchestrator-agent to a listed primary]
+  PR --> WIRE3[Add to catalog-lock evals + Copilot agents allowlist]
+  WIRE --> TWIN[Twin Cursor, Claude, Copilot]
+  WIRE2 --> TWIN
+  WIRE3 --> TWIN
+  </div>
+  <h3>File locations (create all three twins in the same change)</h3>
+  <table>
+    <thead><tr><th>Piece</th><th>Cursor</th><th>Claude</th><th>Copilot</th></tr></thead>
+    <tbody>
+      <tr><td>Primary</td><td><code>.cursor/agents/&lt;name&gt;-agent.md</code></td><td><code>.claude/agents/&lt;name&gt;-agent.md</code></td><td><code>.github/agents/&lt;name&gt;-agent.agent.md</code></td></tr>
+      <tr><td>Subagent</td><td><code>.cursor/subagents/&lt;slug&gt;.md</code></td><td><code>.claude/subagents/&lt;slug&gt;.md</code></td><td><code>.github/subagents/&lt;slug&gt;.md</code> (not a <code>.agent.md</code>)</td></tr>
+      <tr><td>Command</td><td><code>.cursor/commands/&lt;cmd&gt;.md</code></td><td><code>.claude/commands/&lt;cmd&gt;.md</code></td><td><code>.github/prompts/&lt;cmd&gt;.prompt.md</code> with <code>agent: orchestrator-agent</code></td></tr>
+      <tr><td>Skill</td><td><code>.cursor/skills/&lt;name&gt;/SKILL.md</code></td><td><code>.claude/skills/&lt;name&gt;/SKILL.md</code></td><td><code>.github/skills/&lt;name&gt;/SKILL.md</code></td></tr>
+      <tr><td>Rule</td><td><code>.cursor/rules/&lt;nn&gt;-&lt;slug&gt;.mdc</code></td><td><code>.claude/rules/&lt;nn&gt;-&lt;slug&gt;.mdc</code></td><td><code>.github/instructions/&lt;nn&gt;-&lt;slug&gt;.instructions.md</code></td></tr>
+    </tbody>
+  </table>
+  <h3>Required contract shape</h3>
+  <div class="grid2">
+    <div class="card">
+      <h4>Primary (agent-template.md)</h4>
+      <p>Goal · Must / Must NOT · Input checklist · Output checklist · Clarification protocol · Execution loop (max 3) · Check gates · Definition of Done · Audit and harness · Human gates · Delegates · Modes (optional)</p>
+    </div>
+    <div class="card">
+      <h4>Subagent (subagent-template.md)</h4>
+      <p>Purpose · Parent · Must / Must NOT · Inputs · Outputs (structured IO + <code>Confidence: high | medium | low</code> + unresolved assumptions) · Failure modes · Quality gate · Ask-backs · Loop</p>
+    </div>
+  </div>
+  <h3>Wire it — or the orchestrator will never call it</h3>
+  <ol class="sop">
+    <li><strong>Parent Delegates.</strong> Name the subagent on the primary’s <code>## Delegates</code> list. A file in <code>subagents/</code> is not enough.</li>
+    <li><strong>Command contract.</strong> If humans should trigger the work, add or edit a command: <code>Use Agents: orchestrator-agent → &lt;primary&gt;</code> and an ordered <code>Delegate to Subagents</code> chain. Commands never select a subagent as the slash-command primary.</li>
+    <li><strong>Mode (preferred over a new primary).</strong> If an existing primary already owns the domain, add <code>## Modes</code> (example: backend-agent <code>java</code> / <code>python</code>) and branch the command’s phase table on config.</li>
+    <li><strong>scope.yaml.</strong> Grant write globs to the owning primary. Deny secrets, UI (for API agents), <code>docs/harness/**</code>, and <code>docs/test-cases-br-coverage.md</code> for implementers. Orchestrator stays <code>artifacts/audit/**</code> only.</li>
+    <li><strong>config.yaml.</strong> Add module roots, test commands, and health URLs the new agent will read. Placeholders remain a hard stop (rule 01).</li>
+    <li><strong>Rules and skills.</strong> Point the command’s Enforce Rules / Use Skills at the new files. Glob-scoped rules fire on generated paths.</li>
+    <li><strong>KIT-SCOPE.md + catalog-lock evals.</strong> Required when you add a public command or a primary. Factory meta-evals grade 12 primaries until you update them.</li>
+    <li><strong>Copilot allowlist.</strong> After a new primary: <code>node tools/copilot/sync-agent-allowlists.mjs --root . --write</code>. Prompt <code>agent:</code> stays <code>orchestrator-agent</code>.</li>
+    <li><strong>Run factory meta-evals</strong> (<code>evals/factory/</code>: catalog-lock, SoD, agent-contract-compliance, test-case-before-script) before teaching the new piece.</li>
+  </ol>
+  <div class="callout gate">
+    <strong class="label">Hard rules for every new agent</strong>
+    Do not invent business behavior, API fields, or UI copy. Return Open DQ / <code>ASSUMPTION-&lt;id&gt;</code> when sources are silent. Do not self-approve human gates. Do not add public <code>/generate-backend</code>, <code>/generate-frontend</code>, or <code>/wire-*</code> commands. Subagents return confidence to the parent; the parent rejects below-gate output (max 3).
+  </div>
+  <p>Worked samples next: a <a href="#custom">language/stack swap</a> on backend-agent, then <a href="#python">Python</a> and <a href="#kotlin">Kotlin</a>.</p>
+</section>
+
+<section id="custom">
+  <h2>13. Sample pattern — swap the API or UI stack</h2>
+  <p>Use this when the lab or product is not Java 21 + Next.js. The kit will keep working only if you update <strong>command contracts, rules, skills, stack-conventions, config, scope, and all three IDE twins</strong> together. Do not add a 13th peer primary unless the work cannot live as a mode on backend-agent or frontend-agent. Kit catalog-lock evals grade 12 primaries.</p>
+  <h3>Decision tree</h3>
+  <div class="mermaid">
+flowchart TD
+  Q1{"Changing API language\n(Java → Python / Kotlin / Go)?"}
+  Q1 -->|yes| M1["Add a MODE on backend-agent\n+ language module-generator subagent\n+ test-generator subagent"]
+  Q1 -->|no| Q2{"Changing UI framework\n(Next → other)?"}
+  Q2 -->|yes| M2["Add a MODE on frontend-agent\n+ component-generator subagent"]
+  Q2 -->|no| Q3{"New domain the 12 cannot own?"}
+  Q3 -->|yes| P["New primary from agent-template.md\nUpdate catalog-lock evals\nTwin all three IDEs"]
+  Q3 -->|no| S["New subagent or skill only"]
+  M1 --> CMD["Edit /implement-api and /run-tests\nphase tables"]
+  M2 --> CMD2["Edit /implement-ui and /run-tests"]
+  </div>
+  <h3>Standard procedure (do in this order)</h3>
+  <ol class="sop">
+    <li><strong>Write an ADR</strong> under <code>docs/architecture/</code> using <code>adr-template.md</code>. Status Proposed until a human Accepts it. Cite the stack choice. Do not invent NFRs.</li>
+    <li><strong>Fill anatomy files</strong> from <code>workshop/factory-anatomy/</code> for every new piece (subagent first, then rule, skill, then command edits).</li>
+    <li><strong>Add modes</strong> on the existing primary (<code>## Modes</code> on backend-agent / frontend-agent). Name them after the language (<code>kotlin</code>, <code>python</code>, <code>go</code>).</li>
+    <li><strong>Author stack-specific subagents</strong> that mirror the Java ones: <code>&lt;stack&gt;-module-generator</code> and <code>&lt;stack&gt;-test-generator</code>. Parent = backend-agent. Return structured IO + confidence. Must NOT invent columns or skip the BR coverage gate before scripts.</li>
+    <li><strong>Author or retarget a rule</strong>. Do not silently overwrite <code>03-backend-springboot</code> if Java labs still run. Prefer <code>03-backend-kotlin.mdc</code> with globs for the Kotlin module, and keep 03 for remaining Java paths — or replace 03 only when this drop-in is Kotlin-only.</li>
+    <li><strong>Author a coverage skill</strong> if JaCoCo does not apply (Kover, coverage.py, Go cover). Keep <code>br-coverage</code> — that skill is language-agnostic.</li>
+    <li><strong>Rewrite <code>docs/architecture/stack-conventions.md</code></strong> for the new layering (packages, test runner, migration tool). Implement audits must record compliance against this file.</li>
+    <li><strong>Edit command contracts</strong> — see the tables below. This is the step people skip, and then orchestrator still spawns <code>spring-module-generator</code>.</li>
+    <li><strong>Bind config</strong>: <code>modules.api</code> (or <code>modules.python</code> / a new <code>modules.kotlin</code> key you also add to scope), <code>evals.test_commands.api</code>, <code>local_stack.api_health_url</code>.</li>
+    <li><strong>Update scope.yaml</strong> write globs for backend-agent. Deny UI and harness. Keep <code>docs/test-cases-br-coverage.md</code> denied for implementers.</li>
+    <li><strong>Twin Cursor, Claude, and Copilot</strong> in the same change. Copilot primaries need YAML frontmatter; regenerate allowlists with <code>node tools/copilot/sync-agent-allowlists.mjs --root . --write</code> when adding a primary.</li>
+    <li><strong>Run factory meta-evals</strong> under <code>evals/factory/</code> (catalog-lock, SoD, agent-contract-compliance, test-case-before-script).</li>
+    <li><strong>Update KIT-SCOPE.md and this playbook</strong> so the next audience does not think Java is mandatory.</li>
+  </ol>
+  <h3>What you must change on existing commands</h3>
+  <table>
+    <thead><tr><th>Command file</th><th>Default Java/Next binding</th><th>What to change for a new API stack</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>implement-api.md</code></td>
+        <td>Phase 3: <code>spring-module-generator</code>. Phase 4c: <code>spring-test-generator</code>. Skills include jacoco-coverage. Rule 03.</td>
+        <td>Replace those two subagents with the new generators (or branch on config stack). Swap jacoco skill for the new coverage skill. Point Enforce Rules at the new backend rule. Keep api-agent gates 1–2 and br-coverage-validator — those are stack-agnostic.</td>
+      </tr>
+      <tr>
+        <td><code>run-tests.md</code></td>
+        <td>Layer <code>api</code>/<code>IT</code> → backend-agent + spring-test-generator. JaCoCo in Phase 3.</td>
+        <td>Route <code>api</code>/<code>IT</code> to the new test-generator. Change <code>evals.test_commands.api</code> examples in the worksheet. Keep Playwright routing for <code>uat</code>.</td>
+      </tr>
+      <tr>
+        <td><code>review-changes.md</code></td>
+        <td>Block if stack-conventions FAIL when Java API/tests changed. Rule 03.</td>
+        <td>Block if the new stack-conventions FAIL. Keep completeness-ledger refuse.</td>
+      </tr>
+      <tr>
+        <td><code>backend-agent.md</code></td>
+        <td>Delegates list includes spring-* generators.</td>
+        <td>Add the new generators to Delegates and Modes. Keep Must NOT: no UI, no secrets, no BR meaning change.</td>
+      </tr>
+      <tr>
+        <td><code>orchestrator-agent.md</code></td>
+        <td>Does not name Spring directly; it reads the command file.</td>
+        <td>Usually no change unless you add a new public command. If you add <code>/generate-kotlin-module</code>, add a decision-logic row and a command file.</td>
+      </tr>
+      <tr>
+        <td><code>propose-architecture.md</code> / tech-stack-advisor</td>
+        <td>Recommended default Java+Next before waiting for override.</td>
+        <td>Change the recommended default in the advisor subagent and the command hardening line if the drop-in is Kotlin-first. Still ask; still record ADR.</td>
+      </tr>
+      <tr>
+        <td>Kit README + CONFIG-CHECKLIST + stack-conventions</td>
+        <td>Java 21 / Spring Boot 3 + Next.js; Maven example commands.</td>
+        <td>Replace examples with Gradle/Kover or pytest as applicable. Health URL may no longer be Spring Actuator.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Keep these pieces <strong>unchanged</strong> when swapping languages: orchestrator SoD, human gates, provenance rule 22, br-coverage-validator ownership, eval-agent, close-eval-gaps, intake-safety, audit trail, harness-updater exclusivity.</p>
+</section>
+
+<section id="python">
+  <h2>14. Sample — Python</h2>
+  <p>Prefer <strong>backend-agent mode <code>python</code></strong> over a new primary. Author the generators, rule, and optional command from factory-anatomy, then point <code>/implement-api</code> (or a dedicated command) at them.</p>
+  <h3>Files to create (Cursor twin; repeat under Claude and Copilot)</h3>
+  <table>
+    <thead><tr><th>Create</th><th>Suggested path</th><th>Copy shape from</th></tr></thead>
+    <tbody>
+      <tr><td>Subagent</td><td><code>.cursor/subagents/python-code-generator.md</code></td><td><code>spring-module-generator.md</code> + <code>factory-anatomy/subagent-template.md</code></td></tr>
+      <tr><td>Rule</td><td><code>.cursor/rules/27-python-engineering.mdc</code></td><td><code>factory-anatomy/rule-template.md</code> — globs <code>**/*.py</code>; typed public functions; no secrets</td></tr>
+      <tr><td>Optional command</td><td><code>.cursor/commands/generate-python-module.md</code></td><td><code>factory-anatomy/command-template.md</code> — orchestrator → backend-agent mode <code>python</code></td></tr>
+      <tr><td>Coverage skill</td><td>pytest/coverage twin of <code>jacoco-coverage</code> if Python replaces the API</td><td><code>jacoco-coverage/SKILL.md</code></td></tr>
+    </tbody>
+  </table>
+  <h3>Procedure</h3>
+  <ol class="sop">
+    <li>Fill <code>modules.python</code> in config.yaml. Scope already allows <code>${modules.python}/**</code> for backend-agent.</li>
+    <li>Add <code>python-code-generator</code> to backend-agent Delegates and Modes. Must NOT write test scripts until <code>docs/test-cases-br-coverage.md</code> is PASS.</li>
+    <li>Decide whether Python <em>replaces</em> Spring for <code>/implement-api</code> or is a side module. If it replaces: edit implement-api Phase 3/4c to call <code>python-code-generator</code> when config stack is python. If it is a side module: leave implement-api on Spring and add <code>/generate-python-module</code>, then expand-test-coverage.</li>
+    <li>Point <code>evals.test_commands.api</code> at pytest when Python is the API. Keep Maven if Java remains the API.</li>
+    <li>Twin Cursor, Claude, and Copilot. Update KIT-SCOPE and catalog-lock evals if you add a public command.</li>
+  </ol>
+</section>
+
+<section id="kotlin">
+  <h2>15. Sample — Kotlin</h2>
+  <p>Prefer <strong>backend-agent mode <code>kotlin</code></strong> over a new primary named kotlin-agent. Follow factory-anatomy and the file list below.</p>
+  <h3>Files to create (Cursor twin; repeat under Claude and Copilot)</h3>
+  <table>
+    <thead><tr><th>Create</th><th>Suggested path</th><th>Copy shape from</th></tr></thead>
+    <tbody>
+      <tr><td>Subagent</td><td><code>.cursor/subagents/kotlin-module-generator.md</code></td><td><code>spring-module-generator.md</code> + <code>factory-anatomy/subagent-template.md</code></td></tr>
+      <tr><td>Subagent</td><td><code>.cursor/subagents/kotlin-test-generator.md</code></td><td><code>spring-test-generator.md</code></td></tr>
+      <tr><td>Rule</td><td><code>.cursor/rules/03-backend-kotlin.mdc</code></td><td><code>03-backend-springboot.mdc</code> + <code>factory-anatomy/rule-template.md</code></td></tr>
+      <tr><td>Skill</td><td><code>.cursor/skills/kover-coverage/SKILL.md</code> (or jacoco if you keep JaCoCo on Kotlin)</td><td><code>jacoco-coverage/SKILL.md</code> + <code>factory-anatomy/skill-template.md</code></td></tr>
+      <tr><td>Stack conventions</td><td><code>docs/architecture/stack-conventions.md</code></td><td>Replace Spring packages with the Kotlin layering you will actually generate (cite the ADR)</td></tr>
+    </tbody>
+  </table>
+  <h3>Edits to existing files</h3>
+  <ol class="sop">
+    <li><code>backend-agent.md</code> — add mode <code>kotlin</code>. Add the two generators to Delegates. Input checklist: stack from config (<code>java | python | kotlin</code>).</li>
+    <li><code>commands/implement-api.md</code> — Phase 3 and 4c become a branch:
+      <pre>If config stack is kotlin:
+  backend-agent + kotlin-module-generator
+  after BR coverage PASS: kotlin-test-generator
+Else (default):
+  backend-agent + spring-module-generator
+  after BR coverage PASS: spring-test-generator</pre>
+      Keep schema-migration-generator if you still use Flyway; otherwise name the Kotlin migration tool in the command and in the migration skill.
+    </li>
+    <li><code>commands/run-tests.md</code> — execution_layer <code>api</code>/<code>IT</code> routes to kotlin-test-generator when stack is kotlin.</li>
+    <li><code>commands/propose-architecture.md</code> — allow <code>stack_preference</code> of <code>kotlin+next</code>. tech-stack-advisor must offer it as an alternative, not invent cloud NFRs.</li>
+    <li><code>config.yaml.example</code> — document <code>execution.api_stack: kotlin</code> (or reuse a key you add). Change example test command from <code>mvn test</code> to the Gradle/Kotlin command you will actually run. Change actuator health URL if the app is not Spring.</li>
+    <li><code>scope.yaml</code> — backend-agent write already uses <code>${modules.api}/**</code>. If Kotlin lives in a different root, add <code>${modules.kotlin}/**</code> and a config key. Deny UI and coverage file as today.</li>
+    <li><code>quality</code> skill and local-stack scripts — start the Kotlin API the way the lab will run it; verify health before Playwright.</li>
+    <li>Claude twin: same filenames under <code>.claude/</code>. Copilot twin: <code>.github/subagents/</code>, <code>.github/prompts/implement-api.prompt.md</code>, <code>.github/instructions/03-backend-kotlin.instructions.md</code>.</li>
+  </ol>
+  <h3>Subagent quality bar (kotlin-module-generator)</h3>
+  <ul>
+    <li>Must: produce the layers listed in stack-conventions; align DTO names to OpenAPI; no secrets; stay in scope write allowlist.</li>
+    <li>Must NOT: write UI; invent properties absent from OpenAPI/BRD; write test scripts before br-coverage PASS; stamp harness files.</li>
+    <li>Outputs: code paths + confidence + unresolved assumptions list for the parent.</li>
+    <li>Parent rejects below-gate output (max 3).</li>
+  </ul>
+  <div class="callout gate">
+    <strong class="label">Do not</strong>
+    Add public <code>/generate-backend</code>, <code>/generate-frontend</code>, or <code>/wire-*</code> commands. Catalog-lock evals forbid them. Keep Kotlin work inside <code>/implement-api</code>. If you add a satellite command such as <code>/generate-kotlin-module</code>, expand KIT-SCOPE and catalog-lock evals in the same change.
+  </div>
+</section>
+
+<section id="twins">
+  <h2>16. Keep Cursor, Claude, and Copilot twins in parity</h2>
+  <table>
+    <thead><tr><th>Concern</th><th>Cursor</th><th>Claude Code</th><th>GitHub Copilot</th></tr></thead>
+    <tbody>
+      <tr><td>Commands</td><td><code>.cursor/commands/*.md</code></td><td><code>.claude/commands/*.md</code></td><td><code>.github/prompts/*.prompt.md</code></td></tr>
+      <tr><td>Primaries</td><td><code>.cursor/agents/*.md</code></td><td><code>.claude/agents/*.md</code></td><td><code>.github/agents/*.agent.md</code></td></tr>
+      <tr><td>Subagents</td><td><code>.cursor/subagents/</code></td><td><code>.claude/subagents/</code></td><td><code>.github/subagents/</code> (not registered as .agent.md)</td></tr>
+      <tr><td>Rules</td><td><code>.cursor/rules/*.mdc</code></td><td><code>.claude/rules/*.mdc</code></td><td><code>.github/instructions/*.instructions.md</code></td></tr>
+      <tr><td>Always-on</td><td><code>.cursorrules</code></td><td><code>CLAUDE.md</code></td><td><code>.github/copilot-instructions.md</code></td></tr>
+      <tr><td>Config / scope</td><td><code>.cursor/config.yaml</code>, <code>scope.yaml</code></td><td><code>.claude/…</code></td><td><code>.github/…</code></td></tr>
+      <tr><td>Prompt agent:</td><td>—</td><td>—</td><td>Always <code>orchestrator-agent</code>; primary is in the Orchestration table</td></tr>
+    </tbody>
+  </table>
+  <p>Behavioral parity is mandatory. Only path prefixes and rule file extensions differ. After adding Copilot primaries, regenerate <code>agents:</code> allowlists with the sync script named in <code>factory-anatomy/copilot-agent-frontmatter-template.md</code>.</p>
+</section>
+
+<section id="labs">
+  <h2>17. Facilitator agenda and participant lab</h2>
+  <table>
+    <thead><tr><th>Block</th><th>Duration</th><th>Content</th></tr></thead>
+    <tbody>
+      <tr><td>Theory</td><td>30–45 min</td><td>This playbook and factory-anatomy templates</td></tr>
+      <tr><td>Setup</td><td>15 min</td><td>Copy one kit; fill config.yaml; <code>git config core.hooksPath .githooks</code>; <code>pip install -r requirements.txt</code></td></tr>
+      <tr><td>Labs 1–12</td><td>~3 h</td><td>Full spine below</td></tr>
+      <tr><td>Wrap</td><td>15 min</td><td>Walk the custom-stack SOP if the audience will add Python or Kotlin</td></tr>
+    </tbody>
+  </table>
+  <ol class="sop">
+    <li>Fill config (including <code>evals.rule_source</code> and test commands).</li>
+    <li><code>/generate-brd</code> → human sets BRD <strong>Accepted</strong>.</li>
+    <li><code>/propose-architecture</code> → copy config bindings from the proposal.</li>
+    <li><code>/plan-sprint</code> → human sets plan <strong>Approved</strong>.</li>
+    <li><code>/generate-ui-design</code> (reference URL + SP screen) in parallel with <code>/implement-api</code>.</li>
+    <li><code>/implement-ui</code> with <code>mockup_path</code> from step 5.</li>
+    <li><code>/expand-test-coverage</code> → human sets test-package <strong>Approved</strong>.</li>
+    <li>Local stack: <code>bash scripts/run-local-stack.sh</code> and <code>verify-stack-health.sh</code> (or let run-tests Phase 0b do it).</li>
+    <li><code>/run-tests</code> → <code>/run-eval</code> → <code>/close-eval-gaps</code> until auto_fix clear → <code>/review-changes</code> → <code>/application-summary</code>.</li>
+  </ol>
+  <p><strong>Intended outcome:</strong> a running, validated application — stack healthy, tests green, eval ledger without open P0/P1 auto-fix items.</p>
+</section>
+
+<section id="sources">
+  <h2>18. Source index</h2>
+  <p>This playbook does not invent factory behavior. Primary sources:</p>
+  <ul>
+    <li><code>workshop/README.md</code>, <code>workshop/KIT-SCOPE.md</code>, <code>workshop/factory-anatomy/README.md</code></li>
+    <li><code>workshop/worksheets/config-yaml-checklist.md</code>, <code>scope-yaml-guide.md</code></li>
+    <li><code>workshop/starter-kits/cursor/README.md</code>, <code>CURSOR-FLOW.md</code>, <code>KIT-SCOPE.md</code>, <code>docs/architecture/stack-conventions.md</code></li>
+    <li><code>workshop/starter-kits/cursor/.cursor/commands/*.md</code> (operator contracts)</li>
+    <li><code>workshop/starter-kits/cursor/.cursor/agents/*.md</code>, <code>subagents/*.md</code>, <code>rules/*.mdc</code>, <code>skills/*/SKILL.md</code></li>
+  </ul>
+  <p>Open mapping gap (documented, not silently resolved): KIT-SCOPE vs command file on <code>/propose-architecture</code> primary. Command file wins: documentation-agent mode architecture.</p>
+</section>
+
+<footer class="meta">
+  UST AI Factory — Workshop SOP Playbook · File: <code>workshop/WORKSHOP-PLAYBOOK.html</code> · Open in a browser. Print uses the same document with the sidebar hidden.
+</footer>
+</main>
+</div>
+<script>
+  const filter = document.getElementById("filter");
+  const links = [...document.querySelectorAll("nav.toc a")];
+  filter.addEventListener("input", () => {
+    const q = filter.value.trim().toLowerCase();
+    links.forEach((a) => {
+      a.style.display = !q || a.textContent.toLowerCase().includes(q) ? "" : "none";
+    });
+  });
+  const map = links.map((a) => ({ a, id: a.getAttribute("href").slice(1) }));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      links.forEach((l) => l.classList.remove("active"));
+      const hit = map.find((m) => m.id === e.target.id);
+      if (hit) hit.a.classList.add("active");
+    });
+  }, { rootMargin: "-20% 0px -70% 0px" });
+  map.forEach((m) => {
+    const el = document.getElementById(m.id);
+    if (el) io.observe(el);
+  });
+</script>
+</body>
+</html>
