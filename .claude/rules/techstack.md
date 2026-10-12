@@ -18,7 +18,7 @@ This file is the **single source of truth** for tech stack choices. Every other 
 | Backend health endpoint | `GET /health` (explicit route — not automatic like Spring Actuator) | Must be implemented in the app for `scripts/verify-stack-health.sh` |
 | Frontend framework | Flask Jinja templates + HTML/JS | Pages are server-rendered by the Flask app from `templates/`; static assets in `static/` under the UI module. Client-side JS calls API operations defined in OpenAPI (`contracts/openapi/`). |
 | Frontend unit test framework | pytest with the Flask test client for template and route rendering tests | No JS unit framework is declared. Add one only if a client-side script needs it. |
-| Frontend lint / audit tools | ESLint, `npm audit`, TypeScript compiler | |
+| Frontend lint / audit tools | ruff (Python lint, covers the Flask code that renders templates) | None declared for client-side JS. Add a JS linter only if client scripts grow. |
 | E2E test framework | Playwright | See `.claude/config.yaml` `evals.test_commands.e2e` |
 | Frontend build tool / commands | None. Flask serves Jinja templates and static JS/CSS directly; run with the Flask CLI (`flask --app app.main:app run --reload`) | See `.claude/config.yaml` `evals.test_commands.ui` |
 | API style | REST + OpenAPI 3.1 | Flask does not generate OpenAPI natively; the spec in `contracts/openapi/` is the source of truth for API shape, kept in sync by api-agent |
