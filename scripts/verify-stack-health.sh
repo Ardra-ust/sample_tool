@@ -3,7 +3,8 @@
 set -euo pipefail
 
 API_HEALTH_URL="${API_HEALTH_URL:-http://localhost:8080/health}"
-UI_HEALTH_URL="${UI_HEALTH_URL:-http://localhost:3000}"
+# Flask serves the Jinja UI from the same process as the API, so the UI check defaults to the app root.
+UI_HEALTH_URL="${UI_HEALTH_URL:-${API_HEALTH_URL%/health}/}"
 MAX_WAIT_SEC="${MAX_WAIT_SEC:-120}"
 INTERVAL_SEC="${INTERVAL_SEC:-3}"
 

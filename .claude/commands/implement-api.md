@@ -11,11 +11,11 @@ After `/plan-sprint` (**Approved**). Manual per SP item, or as the first execute
 |-------|------|------------------|
 | 1 Schema | If persistence changes | data-agent (mode ddl) / schema-migration-generator |
 | 2 Contract | Always | api-agent gate 1 (design) + gate 2 (OpenAPI sync/verify) |
-| 3 Backend slice | Primary | backend-agent + backend-module-generator (agent-owned per `docs/architecture/stack-conventions.md`) |
+| 3 Backend slice | Primary | backend-agent + backend-module-generator (agent-owned per `docs/architecture/stack-conventions.md`). **If the techstack.md backend is Python:** backend-agent mode `python` + `python-code-generator` |
 | 3b Validation | If cited validation BRs change | validation-chain-generator |
 | 4a Cases | Design | test-case-generator → `docs/test-cases.md` + `docs/test-matrix.md` |
 | 4b Coverage gate | Required | quality-agent → br-coverage-validator (`pre-script`). Only writer of `docs/test-cases-br-coverage.md`. FAIL → expand cases; do not script |
-| 4c Scripts | After PASS | backend-test-generator (agent-owned per stack-conventions) |
+| 4c Scripts | After PASS | backend-test-generator (agent-owned per stack-conventions). **If Python:** `python-code-generator` (test-script step only; refuse before br-coverage PASS) |
 | 4d Execute | Run | api-test-runner |
 
 api-agent gate 2 is not optional. Every run starts with at least a contract **verify**. Full OpenAPI edit only when endpoints/DTOs/status codes change.
@@ -25,11 +25,11 @@ api-agent gate 2 is not optional. Every run starts with at least a contract **ve
 Plan
  → schema-migration-generator (if tables/columns/indexes/seeds change)
  → api-agent (verify; update OpenAPI if shape changes)
- → backend-agent + backend-module-generator
+ → backend-agent + backend-module-generator (Python: mode `python` + python-code-generator)
  → validation-chain-generator (if cited validation BRs change)
  → test-case-generator (`docs/test-cases.md` + matrix)
  → test-cases-br-coverage gate (PASS required)
- → backend-test-generator
+ → backend-test-generator (Python: python-code-generator test-script step)
  → api-test-runner (tests MUST run)
  → Validate → Refine (max 3)
 ```

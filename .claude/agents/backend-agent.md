@@ -40,5 +40,8 @@ Write `artifacts/audit/<YYYY-MM-DD>-backend-agent-<task>.md`. Call harness-updat
 ## Human gates
 Destructive DDL needs quoted story AC.
 
+## Modes
+- `python` — Python backend slice, selected when the backend row in `.claude/rules/techstack.md` is Python. Layers and pytest scripts come from `python-code-generator`. Scripts only after `docs/test-cases-br-coverage.md` is **PASS**. Coverage via the tool named in techstack.md (see `.claude/skills/pytest-coverage/SKILL.md`).
+
 ## Delegates
-schema-migration-generator, backend-module-generator, backend-test-generator, test-case-generator, api-test-runner, api-agent, validation-chain-generator
+schema-migration-generator, backend-module-generator, python-code-generator, backend-test-generator, test-case-generator, api-test-runner, api-agent, validation-chain-generator

@@ -27,7 +27,7 @@ echo "Starting API in $API_ROOT on port $API_PORT ..."
     SPRING_PROFILES_ACTIVE="${SPRING_PROFILES_ACTIVE:-local}" \
       mvn -q spring-boot:run -Dspring-boot.run.arguments="--server.port=$API_PORT" &
   elif [[ -f pyproject.toml || -f requirements.txt ]]; then
-    uvicorn "${API_APP_MODULE:-app.main:app}" --host 0.0.0.0 --port "$API_PORT" --reload &
+    flask --app "${API_APP_MODULE:-app.main:app}" run --host 0.0.0.0 --port "$API_PORT" --reload &
   elif [[ -f build.gradle || -f build.gradle.kts ]]; then
     ./gradlew bootRun --args="--server.port=$API_PORT" &
   elif [[ -f go.mod ]]; then
@@ -47,11 +47,11 @@ echo "Starting UI in $UI_ROOT on port $UI_PORT ..."
   cd "$UI_ROOT"
   if [[ -f package.json ]]; then
     PORT="$UI_PORT" npm run dev &
+    echo $! >> "$PID_FILE"
   else
-    echo "ERROR: No package.json under $UI_ROOT" >&2
-    exit 1
+    # Jinja templates are served by the Flask API process; no separate UI server to start.
+    echo "UI in $UI_ROOT is served by the Flask app (no package.json); skipping separate UI process."
   fi
-  echo $! >> "$PID_FILE"
 )
 
 echo "Stack starting. Run scripts/verify-stack-health.sh before /run-tests E2E."

@@ -1,0 +1,16 @@
+---
+description: Python engineering defaults for the backend (Flask API modules)
+globs: "**/*.py"
+alwaysApply: false
+---
+
+# Python engineering
+
+- Stack (language, framework, version): `.claude/rules/techstack.md`. Layering: `docs/architecture/stack-conventions.md` (Python + Flask column).
+- Typed public functions: annotate parameters and return types on every public function and method.
+- No secrets: never hardcode keys, tokens, passwords, or connection strings. Read them from environment variables or a secret store. Do not log them.
+- Mask PII/PHI in logs, traces, and test artifacts.
+- Validate all external input at the route boundary (Pydantic schemas in `schemas/`); return the centralized error envelope, never stack traces.
+- Layering: routes → services → repositories. Routes do not touch the database directly.
+- Tests use pytest; cite `docs/test-cases.md` case IDs in test names. No unseeded sleeps, random values, wall-clock reads, or random UUIDs inside test bodies.
+- Coverage floor from `.claude/config.yaml` `quality_gates.api_unit_line_coverage_min`; do not lower it.

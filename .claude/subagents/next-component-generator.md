@@ -1,7 +1,7 @@
 # next-component-generator
 
 ## Purpose
-UX/mockup → Next pages/components/hooks.
+UX/mockup → Flask Jinja page templates, partials, and static HTML/JS/CSS (per `.claude/rules/techstack.md`).
 
 ## Parent
 frontend-agent / change-agent
@@ -12,10 +12,10 @@ frontend-agent / change-agent
 
 ## Inputs
 - UI spec
-- OpenAPI types
+- OpenAPI operations (`contracts/openapi/`)
 
 ## Outputs
-- TSX/TS
+- Jinja2 templates (`templates/`) and static HTML/JS/CSS (`static/`)
 - Confidence: high | medium | low
 - Unresolved assumptions list
 

@@ -9,19 +9,19 @@ This file is the **single source of truth** for tech stack choices. Every other 
 
 | Layer | Choice | Notes |
 |---|---|---|
-| Backend language/framework | Python 3.11+ + FastAPI | Agent-owned generation, no template render pipeline. *(Framework not specified by name — FastAPI assumed for native OpenAPI generation; swap this row if you meant Flask/Django.)* |
+| Backend language/framework | Python 3.11+ + Flask | Agent-owned generation, no template render pipeline. Flask selected as the backend framework (replaces the earlier FastAPI default). |
 | Backend ORM / migration tool | SQLAlchemy 2.x + Alembic | Additive/forward-only migrations only |
 | Backend mapper | Pydantic v2 models | Request/response schemas double as the DTO layer |
 | Backend unit/integration test framework | pytest | |
 | Backend coverage tool | coverage.py (`pytest-cov`) | Gate thresholds live in `.claude/config.yaml` `quality_gates.*` |
-| Backend build tool / commands | pip + uvicorn (`pytest`, `pytest --cov`, `uvicorn app.main:app --reload`) | See `.claude/config.yaml` `evals.test_commands.api` |
+| Backend build tool / commands | pip + Flask CLI (`pytest`, `pytest --cov`, `flask --app app.main:app run --reload`) | See `.claude/config.yaml` `evals.test_commands.api` |
 | Backend health endpoint | `GET /health` (explicit route — not automatic like Spring Actuator) | Must be implemented in the app for `scripts/verify-stack-health.sh` |
-| Frontend framework | React 18+ (Vite) + TypeScript | *(Framework not specified beyond "React" — Vite + TypeScript assumed as the default build tool/language; swap this row if you meant plain JS or a different bundler.)* Typed API client generated from OpenAPI |
+| Frontend framework | Flask Jinja templates + HTML/JS | Pages are server-rendered by the Flask app from `templates/`; static assets in `static/` under the UI module. Client-side JS calls API operations defined in OpenAPI (`contracts/openapi/`). |
 | Frontend unit test framework | Vitest + React Testing Library | |
 | Frontend lint / audit tools | ESLint, `npm audit`, TypeScript compiler | |
 | E2E test framework | Playwright | See `.claude/config.yaml` `evals.test_commands.e2e` |
 | Frontend build tool / commands | npm + Vite (`npm run dev`, `npm test`, `npm run test:e2e`) | See `.claude/config.yaml` `evals.test_commands.ui` |
-| API style | REST + OpenAPI 3.1 | FastAPI generates this natively; treat the generated spec as source of truth for API shape (`contracts/openapi/`) |
+| API style | REST + OpenAPI 3.1 | Flask does not generate OpenAPI natively; the spec in `contracts/openapi/` is the source of truth for API shape, kept in sync by api-agent |
 | Persistence / database | SQLite (file-based) | Single-file DB; no separate DB server to boot for local/dev/test |
 | Module layout | `modules/api` + `modules/ui` monorepo | Roots configurable via `.claude/config.yaml` `modules.*` |
 | Auth pattern | JWT bearer (detail deferred to architecture proposal) | |
