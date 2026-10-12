@@ -72,5 +72,6 @@ evals:
   factory_root: evals/factory
   test_commands:
     api: "cd <api-module-root> && pytest"
-    ui: "cd <ui-module-root> && npm test"
+    # Flask template/route tests run in the API pytest suite (no npm step)
+    ui: "cd <api-module-root> && pytest"
     e2e: "cd <ui-module-root> && npm run test:e2e"

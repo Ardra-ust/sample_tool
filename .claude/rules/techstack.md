@@ -17,10 +17,10 @@ This file is the **single source of truth** for tech stack choices. Every other 
 | Backend build tool / commands | pip + Flask CLI (`pytest`, `pytest --cov`, `flask --app app.main:app run --reload`) | See `.claude/config.yaml` `evals.test_commands.api` |
 | Backend health endpoint | `GET /health` (explicit route — not automatic like Spring Actuator) | Must be implemented in the app for `scripts/verify-stack-health.sh` |
 | Frontend framework | Flask Jinja templates + HTML/JS | Pages are server-rendered by the Flask app from `templates/`; static assets in `static/` under the UI module. Client-side JS calls API operations defined in OpenAPI (`contracts/openapi/`). |
-| Frontend unit test framework | Vitest + React Testing Library | |
+| Frontend unit test framework | pytest with the Flask test client for template and route rendering tests | No JS unit framework is declared. Add one only if a client-side script needs it. |
 | Frontend lint / audit tools | ESLint, `npm audit`, TypeScript compiler | |
 | E2E test framework | Playwright | See `.claude/config.yaml` `evals.test_commands.e2e` |
-| Frontend build tool / commands | npm + Vite (`npm run dev`, `npm test`, `npm run test:e2e`) | See `.claude/config.yaml` `evals.test_commands.ui` |
+| Frontend build tool / commands | None. Flask serves Jinja templates and static JS/CSS directly; run with the Flask CLI (`flask --app app.main:app run --reload`) | See `.claude/config.yaml` `evals.test_commands.ui` |
 | API style | REST + OpenAPI 3.1 | Flask does not generate OpenAPI natively; the spec in `contracts/openapi/` is the source of truth for API shape, kept in sync by api-agent |
 | Persistence / database | SQLite (file-based) | Single-file DB; no separate DB server to boot for local/dev/test |
 | Module layout | `modules/api` + `modules/ui` monorepo | Roots configurable via `.claude/config.yaml` `modules.*` |

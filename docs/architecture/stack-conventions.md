@@ -53,7 +53,8 @@ static/    → CSS, JS, images served by Flask
 ## Tests
 
 - Backend unit/integration test framework per `.claude/rules/techstack.md`; cite `docs/test-cases.md` case IDs in test names.
-- Frontend unit and E2E test frameworks per `.claude/rules/techstack.md`.
+- Template and route rendering tests use pytest with the Flask test client; cite case IDs as for backend tests. Add a JS unit framework only if a client-side script requires one.
+- E2E uses Playwright per `.claude/rules/techstack.md`.
 - br-coverage-validator PASS before test scripts.
 
 ## Audit note
