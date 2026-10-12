@@ -1,0 +1,79 @@
+# Mechanical agent boundaries. Parents must refuse work outside allowlists.
+# Paths are repo-relative globs. Empty write: [] means the agent must not write product files.
+# This file is evaluated as literal glob patterns, not prose, so it cannot reference
+# .claude/rules/techstack.md at load time. Instead of hardcoding one stack's file extensions,
+# the source-extension and test-file-name globs below are a fixed, deliberately broad superset
+# across common backend/frontend languages — chosen once so this file needs NO edits when the
+# stack in techstack.md changes. Only add a new pattern here if a stack introduces a source or
+# test-file naming convention not already covered.
+
+version: 1
+
+defaults:
+  deny_secrets: true
+  deny_phi_in_audit: true
+  max_iterations: 3
+
+agents:
+  orchestrator-agent:
+    write: [artifacts/audit/**]
+    deny: ["**/*.{java,ts,tsx,js,jsx,py,go,rb,cs,rs,sql}", docs/harness/**]
+  requirements-agent:
+    write: [artifacts/intake/**, artifacts/brd/**, artifacts/audit/**]
+    deny: ["**/*.{java,ts,tsx,js,jsx,py,go,rb,cs,rs}"]
+  business-analyst-agent:
+    write: [docs/sprint*/userstory/**, docs/stories/**, docs/ux/**, artifacts/audit/**]
+    deny: ["**/*.{java,ts,tsx,js,jsx,py,go,rb,cs,rs,sql}"]
+  reverse-engineering-agent:
+    write: [docs/reverse/**, artifacts/reverse/**, artifacts/audit/**]
+  planner-agent:
+    write: [.claude/plans/**, docs/sprint*/**, artifacts/sprints/**, docs/forward/**, docs/bounded-context/**, artifacts/audit/**]
+    deny: ["**/*.{java,ts,tsx,js,jsx,py,go,rb,cs,rs}"]
+  backend-agent:
+    write: ["${modules.api}/**", "${modules.python}/**", contracts/openapi/**, artifacts/**, docs/**]
+    deny: ["${modules.ui}/**", docs/harness/**, docs/test-cases-br-coverage.md]
+  frontend-agent:
+    write: ["${modules.ui}/**", docs/sprint*/wiring/**, docs/figma/**, artifacts/**, docs/**]
+    deny: ["${modules.api}/**", docs/harness/**, docs/test-cases-br-coverage.md]
+  api-agent:
+    write: [contracts/**, docs/api/**, artifacts/audit/**]
+  infra-agent:
+    write: ["${modules.infra}/**", .github/workflows/**, artifacts/audit/**]
+  data-agent:
+    write: ["${modules.api}/**/db/**", "**/migration/**", docs/data-migration/**, docs/migration/**, artifacts/migration/**, artifacts/audit/**]
+  change-agent:
+    write: ["${modules.api}/**", "${modules.ui}/**", artifacts/audit/**]
+    deny: [docs/test-cases-br-coverage.md]
+    deny_gate_files: [pom.xml, build.gradle, build.gradle.kts, "**/jacoco.xml", pyproject.toml, setup.cfg, "**/.coveragerc", package.json, "**/jest.config.*", "**/vitest.config.*"]
+  quality-agent:
+    write: [docs/quality/**, docs/sprint*/kpi-validations/**, evals/product/results/**, docs/test-cases-br-coverage.md, artifacts/audit/**]
+    deny: [docs/test-cases.md, "**/*Test.java", "**/*Test.cs", "**/*_test.go", "**/test_*.py", "**/*_test.py", "**/*.spec.ts", "**/*.test.ts", "**/*.spec.js", "**/*.test.js"]
+    deny_gate_files: [pom.xml, build.gradle, build.gradle.kts, "**/jacoco.xml", pyproject.toml, setup.cfg, "**/.coveragerc", package.json, "**/jest.config.*", "**/vitest.config.*", .github/workflows/**]
+  br-coverage-validator:
+    write: [docs/test-cases-br-coverage.md, artifacts/audit/**]
+    deny: [docs/test-cases.md, docs/test-matrix.md, "**/*Test.java", "**/*Test.cs", "**/*_test.go", "**/*.py", "**/*.spec.ts", "**/*.test.ts", "**/*.spec.js", "**/*.test.js"]
+  eval-agent:
+    write: [evals/**]
+    deny: ["**/*.{java,ts,tsx,js,jsx,py,go,rb,cs,rs}", artifacts/audit/**]
+  test-agent:
+    write: ["**/*Test.java", "**/*Test.cs", "**/*_test.go", "**/test_*.py", "**/*_test.py", "**/*.spec.ts", "**/*.test.ts", "**/*.spec.js", "**/*.test.js", docs/**/*.feature, docs/test-cases.md, docs/test-cases/**, docs/test-matrix.md, docs/quality/api-validation/**, artifacts/api-validation/**, artifacts/test-results*.md, artifacts/audit/**]
+    deny: [docs/test-cases-br-coverage.md]
+  documentation-agent:
+    write: [docs/**, artifacts/**, artifacts/audit/**]
+    deny: ["**/*.{java,ts,tsx,js,jsx,py,go,rb,cs,rs}", docs/harness/**, docs/test-cases-br-coverage.md]
+  code-review-agent:
+    write: [artifacts/audit/**, artifacts/code-reviews/**]
+    deny: ["**/*.{java,ts,tsx,js,jsx,py,go,rb,cs,rs,sql}"]
+  security-agent:
+    write: [artifacts/security/**, docs/compliance/**, artifacts/audit/**]
+    deny: ["**/*.{java,ts,tsx,js,jsx,py,go,rb,cs,rs}"]
+  sre-agent:
+    write: [docs/sre/**, docs/runbooks/**, docs/performance/**, artifacts/perf/**, artifacts/audit/**]
+  release-agent:
+    write: [docs/release/**, artifacts/audit/**]
+  handoff-agent:
+    write: [docs/handoffs/**, artifacts/audit/**]
+  harness-updater:
+    write: [docs/harness/progress.md, docs/harness/decisions.md]
+  audit-trail-writer:
+    write: [artifacts/audit/**]
