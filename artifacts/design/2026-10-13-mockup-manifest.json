@@ -1,0 +1,36 @@
+{
+  "manifest_version": 1,
+  "created": "2026-10-13",
+  "command": "/generate-ui-design",
+  "screen": "news-grid",
+  "mockup": {
+    "png": "artifacts/design/2026-10-13-news-grid-mockup.png",
+    "source": "artifacts/design/2026-10-13-news-grid-mockup.html",
+    "viewport": "1440x900 (desktop)",
+    "renderer": "Playwright with Microsoft Edge",
+    "production_code": false
+  },
+  "links": {
+    "plan": "artifacts/sprints/S1-plan.md",
+    "plan_status": "Approved (Ardra Arun, 2026-10-13)",
+    "sprint_items": ["SP-09", "SP-10"],
+    "brief": "artifacts/design/2026-10-13-design-brief.md",
+    "requirements": ["FR-026", "FR-027", "FR-028", "FR-029", "FR-030", "FR-031", "FR-032", "FR-033", "AC-013", "AC-014", "AC-015", "AC-016"]
+  },
+  "reference": {
+    "kind": "operator_screenshot",
+    "path": "artifacts/design/current_ui.png",
+    "url": null,
+    "url_capture_run": false,
+    "note": "No reference URL was supplied. The screenshot shows the existing app and includes out-of-scope Insight controls, which the mockup excludes."
+  },
+  "owner_answers_2026_10_13": {
+    "UD-01": "answered: show Updated timestamp from fetched_at",
+    "UD-02": "answered: show See more control",
+    "UD-03": "open: lavender outline for IT-services-aligned news may be an out-of-scope UST alignment feature; priority display not stated",
+    "UD-04": "partly answered: error copy 'No news loaded, check your connection'; loading wording open",
+    "UD-05": "open: UST logo; file not in repo, permission to use not confirmed"
+  },
+  "open_items": ["UD-03", "UD-04", "UD-05"],
+  "copy_policy": "BRD wording only; article content and unknown labels are [Label] placeholders."
+}
