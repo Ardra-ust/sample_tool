@@ -22,7 +22,7 @@ Flask folder tree under the API module (`modules/api`, or `modules.python` when 
 
 ```
 app/
-  main.py          → app object for `flask --app app.main:app` (boot target in run-local-stack.sh)
+  main.py          → app object for `flask --app app.main:app` (boot target in run-local-stack.sh); template_folder and static_folder point to modules/ui
   routes/          → Flask Blueprints: REST endpoints and health route (GET /health)
   services/        → business logic, transactions, orchestration
   repositories/    → data access (SQLAlchemy sessions and queries)
@@ -40,11 +40,11 @@ Only the frameworks listed above resolve automatically. Naming case follows each
 
 ## Frontend (`modules/ui`)
 
-Flask Jinja templates + HTML/JS per `.claude/rules/techstack.md`. The Flask app serves these pages; no separate UI server is required.
+Flask Jinja templates + HTML/JS per `.claude/rules/techstack.md`. The Flask app in `modules/api/app/main.py` serves these pages through `template_folder` and `static_folder`, which point at the folders below. No separate UI server is required.
 
 ```
-templates/ → Jinja2 page templates (base layout, pages, partials)
-static/    → CSS, JS, images served by Flask
+modules/ui/templates/ → Jinja2 page templates (base layout, pages, partials)
+modules/ui/static/    → CSS, JS, images served by Flask
 ```
 
 - Wiring gate: every UI action traces to OpenAPI operation + story AC.

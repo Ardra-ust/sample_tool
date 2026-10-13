@@ -30,11 +30,13 @@ agents:
     write: [.claude/plans/**, docs/sprint*/**, artifacts/sprints/**, docs/forward/**, docs/bounded-context/**, artifacts/audit/**]
     deny: ["**/*.{java,ts,tsx,js,jsx,py,go,rb,cs,rs}"]
   backend-agent:
-    write: ["${modules.api}/**", "${modules.python}/**", contracts/openapi/**, artifacts/**, docs/**]
-    deny: ["${modules.ui}/**", docs/harness/**, docs/test-cases-br-coverage.md]
+    # modules.api holds the Flask app (app/); Jinja templates and static files live in modules.ui
+    write: ["${modules.api}/**", "${modules.python}/**", "${modules.ui}/templates/**", "${modules.ui}/static/**", contracts/openapi/**, artifacts/**, docs/**]
+    deny: [docs/harness/**, docs/test-cases-br-coverage.md]
   frontend-agent:
-    write: ["${modules.ui}/**", docs/sprint*/wiring/**, docs/figma/**, artifacts/**, docs/**]
-    deny: ["${modules.api}/**", docs/harness/**, docs/test-cases-br-coverage.md]
+    # UI write scope is the Flask template and static folders only; Python app code and tests are denied
+    write: ["${modules.ui}/templates/**", "${modules.ui}/static/**", docs/sprint*/wiring/**, docs/figma/**, artifacts/**, docs/**]
+    deny: ["${modules.api}/app/routes/**", "${modules.api}/app/services/**", "${modules.api}/app/repositories/**", "${modules.api}/app/schemas/**", "${modules.api}/app/models/**", "${modules.api}/tests/**", docs/harness/**, docs/test-cases-br-coverage.md]
   api-agent:
     write: [contracts/**, docs/api/**, artifacts/audit/**]
   infra-agent:

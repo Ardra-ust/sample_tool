@@ -1,0 +1,901 @@
+{
+  "date": "2026-10-13",
+  "mode": "incremental",
+  "verdict": "FAIL",
+  "confidence": "medium",
+  "rule_source": "artifacts/brd/ai-news-agent-BRD-draft.md",
+  "rules_total": 76,
+  "rules_pass": 34,
+  "rules_fail": 42,
+  "rules_not_run": 0,
+  "ledger_rows": 88,
+  "fix_queue_items": 29,
+  "auto_fix_open": 2,
+  "needs_human": 27,
+  "rows": [
+    {
+      "rule_id": "BR-001",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-016",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-016 FAIL"
+    },
+    {
+      "rule_id": "BR-002",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-016",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-016 FAIL"
+    },
+    {
+      "rule_id": "BR-003",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-016",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-016 FAIL"
+    },
+    {
+      "rule_id": "BR-004",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-015",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-015 FAIL"
+    },
+    {
+      "rule_id": "BR-005",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-015",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-015 FAIL"
+    },
+    {
+      "rule_id": "BR-006",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-015",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-015 FAIL"
+    },
+    {
+      "rule_id": "BR-007",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-016",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-016 FAIL"
+    },
+    {
+      "rule_id": "BR-008",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-016",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-016 FAIL"
+    },
+    {
+      "rule_id": "BR-009",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-003, docs/test-matrix.md#TC-017",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-003 FAIL; TC-017 FAIL"
+    },
+    {
+      "rule_id": "BR-010",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-016, docs/test-matrix.md#TC-017",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-016 FAIL; TC-017 FAIL"
+    },
+    {
+      "rule_id": "BR-011",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-012, docs/test-matrix.md#TC-013",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-012 FAIL; TC-013 FAIL"
+    },
+    {
+      "rule_id": "BR-012",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-014",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-014 FAIL"
+    },
+    {
+      "rule_id": "BR-013",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-014",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-014 FAIL"
+    },
+    {
+      "rule_id": "BR-014",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-008",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-008 PASS"
+    },
+    {
+      "rule_id": "BR-015",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-025",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-025 PASS"
+    },
+    {
+      "rule_id": "BR-016",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-026a",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-026a PASS"
+    },
+    {
+      "rule_id": "BR-017",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-010",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-010 PASS"
+    },
+    {
+      "rule_id": "BR-018",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-018",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-018 FAIL"
+    },
+    {
+      "rule_id": "FR-001",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-001",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-001 FAIL"
+    },
+    {
+      "rule_id": "FR-002",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-002",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-002 FAIL"
+    },
+    {
+      "rule_id": "FR-003",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-002",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-002 FAIL"
+    },
+    {
+      "rule_id": "FR-004",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-003",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-003 FAIL"
+    },
+    {
+      "rule_id": "FR-005",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-003",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-003 FAIL"
+    },
+    {
+      "rule_id": "FR-006",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-003",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-003 FAIL"
+    },
+    {
+      "rule_id": "FR-007",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-004",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-004 FAIL"
+    },
+    {
+      "rule_id": "FR-008",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-005",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-005 FAIL"
+    },
+    {
+      "rule_id": "FR-009",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-005",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-005 FAIL"
+    },
+    {
+      "rule_id": "FR-010",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-001, docs/test-matrix.md#TC-006",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-001 FAIL; TC-006 FAIL"
+    },
+    {
+      "rule_id": "FR-011",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-007",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-007 FAIL"
+    },
+    {
+      "rule_id": "FR-012",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-008",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-008 PASS"
+    },
+    {
+      "rule_id": "FR-013",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-009",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-009 FAIL"
+    },
+    {
+      "rule_id": "FR-014",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-010",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-010 PASS"
+    },
+    {
+      "rule_id": "FR-015",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-011",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-011 PASS"
+    },
+    {
+      "rule_id": "FR-016",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-012",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-012 FAIL"
+    },
+    {
+      "rule_id": "FR-017",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-013",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-013 FAIL"
+    },
+    {
+      "rule_id": "FR-018",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-013",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-013 FAIL"
+    },
+    {
+      "rule_id": "FR-019",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-014",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-014 FAIL"
+    },
+    {
+      "rule_id": "FR-020",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-015",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-015 FAIL"
+    },
+    {
+      "rule_id": "FR-021",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-016",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-016 FAIL"
+    },
+    {
+      "rule_id": "FR-022",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-018",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-018 FAIL"
+    },
+    {
+      "rule_id": "FR-023",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-019, docs/test-matrix.md#TC-034",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-019 FAIL; TC-034 PASS"
+    },
+    {
+      "rule_id": "FR-024",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-021",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-021 FAIL"
+    },
+    {
+      "rule_id": "FR-025",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-021, docs/test-matrix.md#TC-022",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-021 FAIL; TC-022 FAIL"
+    },
+    {
+      "rule_id": "FR-026",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-035",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-035 PASS"
+    },
+    {
+      "rule_id": "FR-027",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-036",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-036 PASS"
+    },
+    {
+      "rule_id": "FR-028",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-037",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-037 PASS"
+    },
+    {
+      "rule_id": "FR-029",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-038",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-038 PASS"
+    },
+    {
+      "rule_id": "FR-030",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-039",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-039 PASS"
+    },
+    {
+      "rule_id": "FR-031",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-040",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-040 PASS"
+    },
+    {
+      "rule_id": "FR-032",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-035",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-035 PASS"
+    },
+    {
+      "rule_id": "FR-033",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-035",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-035 PASS"
+    },
+    {
+      "rule_id": "FR-034",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-023",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-023 PASS"
+    },
+    {
+      "rule_id": "FR-035",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-025, docs/test-matrix.md#TC-047",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-025 PASS; TC-047 PASS"
+    },
+    {
+      "rule_id": "FR-036",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-026",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-026 PASS"
+    },
+    {
+      "rule_id": "FR-037",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-027",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-027 PASS"
+    },
+    {
+      "rule_id": "FR-038",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-024",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-024 PASS"
+    },
+    {
+      "rule_id": "FR-039",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-028",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-028 PASS"
+    },
+    {
+      "rule_id": "FR-040",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-029",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-029 PASS"
+    },
+    {
+      "rule_id": "FR-041",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-030",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-030 PASS"
+    },
+    {
+      "rule_id": "FR-042",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-031",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-031 PASS"
+    },
+    {
+      "rule_id": "FR-043",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-032",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "quality-agent",
+      "notes": "TC-032 FAIL (FR-043 has no sprint item (planning gap))"
+    },
+    {
+      "rule_id": "FR-044",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-033, docs/test-matrix.md#TC-034",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-033 PASS; TC-034 PASS"
+    },
+    {
+      "rule_id": "FR-045",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-020",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-020 FAIL"
+    },
+    {
+      "rule_id": "FR-046",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-048",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-048 PASS"
+    },
+    {
+      "rule_id": "FR-047",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-050",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "TC-050 FAIL"
+    },
+    {
+      "rule_id": "FR-048",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-049",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "TC-049 PASS"
+    },
+    {
+      "rule_id": "NFR-001",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-031",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P1",
+      "owner": "-",
+      "notes": "TC-031 PASS"
+    },
+    {
+      "rule_id": "NFR-002",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-023, docs/test-matrix.md#TC-027",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P1",
+      "owner": "-",
+      "notes": "TC-023 PASS; TC-027 PASS"
+    },
+    {
+      "rule_id": "NFR-003",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-022",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P1",
+      "owner": "backend-agent",
+      "notes": "TC-022 FAIL"
+    },
+    {
+      "rule_id": "NFR-004",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-026a",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P1",
+      "owner": "-",
+      "notes": "TC-026a PASS"
+    },
+    {
+      "rule_id": "NFR-005",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-045, docs/test-matrix.md#TC-045b",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P1",
+      "owner": "quality-agent",
+      "notes": "TC-045 FAIL (parity check not built; baseline missing); TC-045b SKIP (skipped: owner baseline evals/product/baseline.md missing)"
+    },
+    {
+      "rule_id": "NFR-006",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-043",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P1",
+      "owner": "-",
+      "notes": "TC-043 PASS"
+    },
+    {
+      "rule_id": "NFR-007",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-041",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P1",
+      "owner": "-",
+      "notes": "TC-041 PASS"
+    },
+    {
+      "rule_id": "NFR-008",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-044",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P1",
+      "owner": "-",
+      "notes": "TC-044 PASS"
+    },
+    {
+      "rule_id": "NFR-009",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-046",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P1",
+      "owner": "backend-agent",
+      "notes": "TC-046 FAIL (text cleaning (NFR-009) not built)"
+    },
+    {
+      "rule_id": "NFR-010",
+      "family": "L1-10-requirement-completeness",
+      "case_path": "docs/test-matrix.md#TC-047",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P1",
+      "owner": "-",
+      "notes": "TC-047 PASS"
+    },
+    {
+      "rule_id": "L1-04-input-validation",
+      "family": "L1-04-input-validation",
+      "case_path": "none",
+      "status": "MISSING",
+      "verdict": "catalog_gap",
+      "severity": "P0",
+      "owner": "eval-agent",
+      "notes": "No mandatory negative case for invalid input. Adding cases changes the Approved test package; route via /expand-test-coverage. See EV-025."
+    },
+    {
+      "rule_id": "L1-05-error-handling",
+      "family": "L1-05-error-handling",
+      "case_path": "docs/test-matrix.md#TC-026, docs/test-matrix.md#TC-040, docs/test-matrix.md#TC-041",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "Positive: TC-040 empty state. Negative: TC-026 HTTP 500, TC-041 load failure. Open: OQ-API-1 (500 body wording) unresolved."
+    },
+    {
+      "rule_id": "L1-08-security-anti-pattern",
+      "family": "L1-08-security-anti-pattern",
+      "case_path": "none",
+      "status": "MISSING",
+      "verdict": "not_run",
+      "severity": "P0",
+      "owner": "quality-agent",
+      "notes": "No SAST or security anti-pattern tool configured. Tool choice is a human decision. See EV-026."
+    },
+    {
+      "rule_id": "L1-09-secret-handling",
+      "family": "L1-09-secret-handling",
+      "case_path": "docs/test-matrix.md#TC-031, docs/test-matrix.md#TC-043, docs/test-matrix.md#TC-026",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P0",
+      "owner": "-",
+      "notes": "Positive: TC-031 settings from .env. Negative: TC-043 secrets masked in logs; TC-026 redaction test."
+    },
+    {
+      "rule_id": "L4-03-gate-blocks-security",
+      "family": "L4-03-gate-blocks-security",
+      "case_path": "none",
+      "status": "MISSING",
+      "verdict": "not_run",
+      "severity": "P0",
+      "owner": "quality-agent",
+      "notes": "No security gate in build or CI. Enable only; tool choice is a human decision. See EV-027."
+    },
+    {
+      "rule_id": "AR-TCG-completeness",
+      "family": "agent-result",
+      "case_path": "docs/test-cases.md",
+      "status": "NEW",
+      "verdict": "not_run",
+      "severity": "P1",
+      "owner": "quality-agent",
+      "notes": "tc-completeness-validator and tc-step-quality-validator have not been run on docs/test-cases.md. See EV-028."
+    },
+    {
+      "rule_id": "AR-coverage-gate-honesty",
+      "family": "agent-result",
+      "case_path": "docs/test-cases-br-coverage.md",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P1",
+      "owner": "-",
+      "notes": "Coverage gate PASS, 100%, by br-coverage-validator. Gate is design-level; execution results are in the run-tests row below."
+    },
+    {
+      "rule_id": "AR-run-tests-vs-matrix",
+      "family": "agent-result",
+      "case_path": "docs/test-matrix.md, artifacts/test-results-2026-10-13-run-tests.md",
+      "status": "IMPROVED",
+      "verdict": "fail",
+      "severity": "P1",
+      "owner": "test-agent",
+      "notes": "Matrix last_result and status are still designed and dash for all 51 cases; run results are not reflected. See EV-029."
+    },
+    {
+      "rule_id": "AR-E2E-AC-citations",
+      "family": "agent-result",
+      "case_path": "modules/api/tests/test_ui_cases.py",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P1",
+      "owner": "-",
+      "notes": "UI cases cite TC-035 to TC-041 and FR IDs via matrix. AC column is dash for these cases."
+    },
+    {
+      "rule_id": "AR-intake-scan",
+      "family": "agent-result",
+      "case_path": "artifacts/intake/2026-10-13-intake-notes.md",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P1",
+      "owner": "-",
+      "notes": "intake-safety-scan PASS, exit 0, 3 files, 0 injection and 0 PII hits (recorded in intake notes). Exit code not re-run in this eval."
+    },
+    {
+      "rule_id": "AR-defect-analysis",
+      "family": "agent-result",
+      "case_path": "artifacts/issues/2026-10-13-run-tests-defects.md",
+      "status": "EXISTS",
+      "verdict": "pass",
+      "severity": "P1",
+      "owner": "-",
+      "notes": "All 23 failures and the TC-045b skip covered. Written as grouped analysis, not one file per failure (deviation from run-tests spec)."
+    },
+    {
+      "rule_id": "AR-coding-gaps-in-slice",
+      "family": "agent-result",
+      "case_path": "artifacts/sprints/S1-plan.md",
+      "status": "EXISTS",
+      "verdict": "fail",
+      "severity": "P0",
+      "owner": "backend-agent",
+      "notes": "SP-04 to SP-08 stages not built (22 failing cases). FR-043 has no sprint item. See product rows above."
+    }
+  ],
+  "unresolved_assumptions": [
+    "ASSUMPTION-EVAL-001: BR-001..008 and NFR severities are not stated in the BRD grep. FR and BR assigned P0, NFR P1.",
+    "ASSUMPTION-EVAL-002: pointer case folders not created; case_path points to docs/test-matrix.md IDs."
+  ]
+}

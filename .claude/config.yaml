@@ -4,7 +4,7 @@ project:
 
 modules:
   api: "modules/api"
-  ui: "modules/api"
+  ui: "modules/ui"
   openapi: "contracts/openapi/ai-news-agent-v1.yaml"
 
 intake:
@@ -63,7 +63,7 @@ local_stack:
 
 evals:
   root: evals/product
-  rule_source: ""   # left blank for now
+  rule_source: "artifacts/brd/ai-news-agent-BRD-draft.md"   # accepted BRD v0.2 (Ardra Arun, 2026-10-13)
   rule_id_pattern: "(FR|BR|NFR|INT)-[0-9]+"
   status: evals/product/STATUS.md
   results: evals/product/results/

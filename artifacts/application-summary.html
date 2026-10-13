@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Application Summary — AI News Agent (S1)</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; color: #1d1d1f; margin: 32px; line-height: 1.45; max-width: 1080px; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  h2 { font-size: 17px; border-bottom: 1px solid #d0d0d7; padding-bottom: 4px; margin-top: 28px; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 13px; }
+  th, td { border: 1px solid #d0d0d7; padding: 6px 8px; text-align: left; vertical-align: top; }
+  th { background: #f2f2f5; }
+  .block { display: inline-block; background: #b00020; color: #fff; padding: 3px 10px; border-radius: 3px; font-weight: bold; }
+  .muted { color: #6e6e73; font-size: 12px; }
+  code { background: #f2f2f5; padding: 1px 4px; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<h1>Application Summary — AI News Agent (S1)</h1>
+<p class="muted">Generated 2026-10-13 by <code>/application-summary</code>. Metrics collected in this run. Not a release sign-off.</p>
+
+<table>
+  <tr><th>Field</th><th>Value</th></tr>
+  <tr><td>Commit / branch</td><td><code>bb19679</code> / <code>fill-config-ai-news-agent</code> (working tree has uncommitted S1 changes: tests, artifacts, docs, eval outputs)</td></tr>
+  <tr><td>Sprint</td><td>S1 (BRD v0.2; plan Approved by Ardra Arun, 2026-10-13)</td></tr>
+  <tr><td>Overall readiness</td><td><span class="block">BLOCKED</span> — not ready for PR or release review</td></tr>
+</table>
+
+<h2>Executive summary</h2>
+<ul>
+  <li><strong>Delivered:</strong> Flask backend slices SP-02 (refresh start, atomic lock, worker, stale-lock clear) and SP-03 (read routes: <code>GET /api/news</code>, <code>GET /api/refresh/status</code>, <code>GET /health</code>), plus the news grid UI (SP-09, SP-10). The LLM relevance stages 3 and 5 are implemented with IT-services alignment. The OpenAPI contract and test package exist.</li>
+  <li><strong>Not delivered:</strong> the pipeline that produces news. Source fetch, noise filter, dedupe, freshness, deal tagging, classification, priority, sort, and save (SP-04 to SP-08) are not built. Without them a refresh cannot produce a snapshot.</li>
+  <li><strong>Why blocked:</strong> the review (<code>artifacts/audit/2026-10-13-review-changes-S1.md</code>) returned BLOCK on three P0 items: the unbuilt pipeline, no input-validation negative cases, and no SAST or security gate.</li>
+</ul>
+
+<h2>Scope delivered</h2>
+<table>
+  <tr><th>Story / SP</th><th>Title</th><th>API</th><th>UI</th><th>Tests</th><th>Status</th></tr>
+  <tr><td>SP-02</td><td>Refresh start, atomic lock, worker, stale-lock clear</td><td>yes</td><td>—</td><td>yes (TC-025, TC-026, TC-026a, TC-028, TC-029)</td><td>Done</td></tr>
+  <tr><td>SP-03</td><td>Read routes: news, refresh status, health</td><td>yes</td><td>—</td><td>yes (TC-023, TC-024, TC-027)</td><td>Done</td></tr>
+  <tr><td>SP-09, SP-10</td><td>News grid, filters, refresh button, states</td><td>—</td><td>yes</td><td>yes (TC-035 to TC-041, 7 UI cases)</td><td>Done</td></tr>
+  <tr><td>Stages 3 and 5</td><td>LLM title re-check and relevance gate (IT-services aligned)</td><td>—</td><td>—</td><td>yes (TC-008, TC-010, TC-011, TC-049, TC-050)</td><td>Done</td></tr>
+  <tr><td>SP-04 to SP-08</td><td>Fetch, noise, dedupe, freshness, tagging, classify, priority, sort, save</td><td>no</td><td>no</td><td>fail (22 cases, module not found)</td><td>Not started</td></tr>
+</table>
+
+<h2>Architecture snapshot</h2>
+<ul>
+  <li><strong>Modules touched:</strong> <code>modules/api</code> (Flask app, SQLAlchemy, Alembic), <code>modules/ui</code> (Jinja templates, static CSS and JS).</li>
+  <li><strong>Contracts:</strong> <code>contracts/openapi/ai-news-agent-v1.yaml</code>.</li>
+  <li><strong>Migrations:</strong> 0001 (creates <code>new_data</code> and <code>refresh_status</code>, seeds the Ready row).</li>
+  <li><strong>Key integrations:</strong> MySQL (database <code>news_app</code>); Azure OpenAI for LLM stages (approved, DQ-A5); RSS, Google News, SearchAPI.io, Tavily sources (not yet wired into the pipeline).</li>
+  <li><strong>Decisions:</strong> ADR-001 (Flask web service and UI layout), ADR-002 (refresh worker and lock), ADR-003 (Azure OpenAI and MySQL). All accepted.</li>
+</ul>
+
+<h2>Quality evidence (fresh metrics, this run)</h2>
+<table>
+  <tr><th>Area</th><th>Metric</th><th>Threshold</th><th>Actual</th><th>Source artifact</th></tr>
+  <tr><td>Unit coverage (API, <code>app/</code>)</td><td>line %</td><td>70%</td><td><strong>93%</strong> (405 statements, 28 missed); met</td><td><code>modules/api/coverage.xml</code></td></tr>
+  <tr><td>Backend and UI tests</td><td>pass / fail / skip</td><td>0 failing</td><td><strong>49 pass, 23 fail, 1 skip</strong> (73 total)</td><td><code>artifacts/test-results-2026-10-13-run-tests.md</code></td></tr>
+  <tr><td>UI tests (Edge, Playwright)</td><td>pass / fail</td><td>all pass</td><td>7 of 7 pass</td><td><code>artifacts/test-results-2026-10-13-run-tests.md</code></td></tr>
+  <tr><td>E2E (npx Playwright)</td><td>—</td><td>—</td><td>not run; UI checks ran in Python Playwright with Edge (deviation)</td><td>—</td></tr>
+  <tr><td>BR coverage</td><td>PASS / FAIL</td><td>PASS</td><td>PASS (100%, 100 of 100 rows)</td><td><code>docs/test-cases-br-coverage.md</code></td></tr>
+  <tr><td>Eval (rules)</td><td>pass / fail / not run</td><td>0 P0 failing</td><td>34 pass, 42 fail, 0 not run (of 76 BRD rules)</td><td><code>evals/product/results/2026-10-13-completeness-ledger.md</code></td></tr>
+  <tr><td>Eval fix queue</td><td>open items</td><td>0 open auto-fix</td><td>2 closed (EV-028, EV-029); 27 needs_human</td><td><code>evals/product/results/2026-10-13-fix-queue.json</code></td></tr>
+  <tr><td>KPI validation</td><td>GO / NO_GO</td><td>—</td><td>N/A (not in this kit)</td><td>—</td></tr>
+  <tr><td>Security scan</td><td>critical / high open</td><td>0 unwaived</td><td>no tool configured; L1-08 and L4-03 MISSING</td><td>—</td></tr>
+  <tr><td>Code review</td><td>blocking findings</td><td>0</td><td>3 P0 blocking; 3 lower-severity</td><td><code>artifacts/audit/2026-10-13-review-changes-S1.md</code></td></tr>
+</table>
+
+<h2>Known gaps and risks</h2>
+<table>
+  <tr><th>ID</th><th>Gap / risk</th><th>Severity</th><th>Owner</th><th>Mitigation</th></tr>
+  <tr><td>RC-1</td><td>SP-04 to SP-08 not built; 42 BRD rules fail</td><td>P0</td><td>Owner / backend-agent</td><td>Schedule the build via <code>/implement-api</code>, then <code>/run-tests</code></td></tr>
+  <tr><td>RC-2</td><td>No SAST or security gate (L1-08, L4-03)</td><td>P0</td><td>Owner / quality-agent</td><td>Choose a tool and enable the gate</td></tr>
+  <tr><td>RC-3</td><td>No input-validation negative cases (L1-04)</td><td>P0</td><td>Owner / test-agent</td><td>New cases via <code>/expand-test-coverage</code> and human approval</td></tr>
+  <tr><td>RC-4</td><td>Test-layer stack compliance not recorded</td><td>P1</td><td>quality-agent</td><td>Run and record a compliance check</td></tr>
+  <tr><td>DQ-019</td><td>Parity baseline (<code>evals/product/baseline.md</code>) not recorded; TC-045 and TC-045b blocked</td><td>P1</td><td>Owner</td><td>Owner records three-run averages</td></tr>
+  <tr><td>DQ-022</td><td>Blue IT-services marker not built; rule not yet defined by owner</td><td>P2</td><td>Owner</td><td>Owner provides the rule</td></tr>
+  <tr><td>OQ-API-1, OQ-API-2</td><td>500 error body wording and <code>last_run_type</code> values not confirmed</td><td>P2</td><td>Owner</td><td>Owner confirms</td></tr>
+  <tr><td>Harness</td><td><code>docs/harness/progress.md</code> not updated for this run (harness-updater unavailable here)</td><td>P2</td><td>Orchestrator</td><td>Run harness-updater</td></tr>
+</table>
+
+<h2>Human gates status</h2>
+<table>
+  <tr><th>Gate</th><th>Status</th><th>Reference</th></tr>
+  <tr><td>BRD Accepted</td><td>Accepted (v0.2), Ardra Arun, 2026-10-13</td><td><code>artifacts/brd/ai-news-agent-BRD-draft.md</code></td></tr>
+  <tr><td>Plan Approved</td><td>Approved, Ardra Arun, 2026-10-13</td><td><code>artifacts/sprints/S1-plan.md</code></td></tr>
+  <tr><td>Test package Approved</td><td>Approved, Ardra Arun, 2026-10-13</td><td><code>docs/quality/test-package-review.md</code></td></tr>
+  <tr><td>Architecture ADRs</td><td>Accepted, Ardra Arun</td><td><code>docs/architecture/</code></td></tr>
+  <tr><td>Completeness ledger reviewed</td><td>Present; verdict FAIL</td><td><code>evals/product/results/2026-10-13-completeness-ledger.md</code></td></tr>
+  <tr><td>KPI GO</td><td>N/A</td><td>—</td></tr>
+</table>
+
+<h2>Recommended next steps</h2>
+<ol>
+  <li>Decide whether to schedule the SP-04 to SP-08 build (owner).</li>
+  <li>Choose the SAST tool and enable the security gate (owner, quality-agent).</li>
+  <li>Approve new input-validation negative cases through <code>/expand-test-coverage</code> (owner).</li>
+  <li>Record the parity baseline (owner).</li>
+  <li>After the blockers are resolved, re-run <code>/run-tests</code>, <code>/run-eval</code>, and <code>/review-changes</code>. Then run <code>/application-summary</code> again.</li>
+</ol>
+
+<p class="muted">No secrets or personal data in this summary. Tests use dummy values only.</p>
+
+</body>
+</html>

@@ -23,8 +23,8 @@ If health check fails → **environment FAIL**; owning agent: **backend-agent** 
 From config `evals.test_commands.e2e`, default stack example:
 
 ```bash
-cd <ui-module-root>
-npm run test:e2e
+cd <api-module-root>
+npx playwright test
 ```
 
 Use a stable/headless browser channel when browser download is blocked. Default `--workers=1` (or the E2E framework's equivalent single-worker flag).

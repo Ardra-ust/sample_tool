@@ -10,7 +10,7 @@
 | **Branch / commit** | {{branch}} / {{sha}} |
 | **UI module root** | `${modules.ui}` |
 | **Command** | {{/implement-ui, /expand-test-coverage}} |
-| **Runner** | `npm run test:e2e` (see e2e-testing skill) |
+| **Runner** | `npx playwright test` (see e2e-testing skill) |
 
 ## Summary
 

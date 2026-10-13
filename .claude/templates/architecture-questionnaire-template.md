@@ -32,8 +32,8 @@
 
 | # | Question | Answer | Source if pre-filled |
 |---|----------|--------|----------------------|
-| 11 | Preferred backend stack (Java/Spring, Python, other)? | | |
-| 12 | Preferred UI stack (Next.js, other)? | | |
+| 11 | Preferred backend stack (Python/Flask, other)? | | |
+| 12 | Preferred UI stack (Flask Jinja templates + HTML/JS, other)? | | |
 | 13 | Data stores (relational, cache, search, blob)? | | |
 | 14 | Messaging or event bus required? | | |
 | 15 | Legacy systems that must integrate? | | |

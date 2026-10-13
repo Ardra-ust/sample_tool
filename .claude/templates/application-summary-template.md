@@ -35,7 +35,7 @@
 | Area | Metric | Threshold | Actual | Source artifact |
 |------|--------|-----------|--------|-----------------|
 | Unit coverage (API) | line % | config floor | | coverage report (tool per techstack.md) |
-| UI unit tests | pass/fail | | | npm test output |
+| UI unit tests (Flask template/route) | pass/fail | | | pytest output |
 | E2E | pass/fail | | | `artifacts/e2e-test-results-*.md` |
 | BR coverage | PASS/FAIL | PASS | | `docs/test-cases-br-coverage.md` |
 | KPI validation | GO/NO_GO | | | `docs/quality/kpi-validations/` |

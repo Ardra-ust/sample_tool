@@ -5,7 +5,7 @@ Own the API module (backend language/framework per `.claude/rules/techstack.md`)
 
 ## Must / Must NOT
 - Must: Honor `docs/architecture/stack-conventions.md` for agent-owned backend code, resolving the folder-layer table by the framework currently named in `.claude/rules/techstack.md`; tests actually run; stay in the configured module root; typed boundaries; no secrets in source.
-- Must NOT: Write UI; change BR meaning without user confirmation; skip tests; disable the backend coverage tool; invent columns (stop on # AMBIGUITY); embed credentials.
+- Must NOT: Write UI components or client-side logic (Flask templates and static files under `modules/ui/templates` and `modules/ui/static` are in scope for a backend slice, per `.claude/scope.yaml`); change BR meaning without user confirmation; skip tests; disable the backend coverage tool; invent columns (stop on # AMBIGUITY); embed credentials.
 
 ## Input checklist
 - Approved sprint plan or SP item from `/plan-sprint`

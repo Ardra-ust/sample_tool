@@ -23,7 +23,7 @@ frontend-agent
 Incomplete input → partial result with explicit gaps.
 
 ## Quality gate
-npm test run.
+pytest run for Flask template/route tests (`cd modules/api && pytest`); Playwright e2e when run_e2e is set.
 
 ## Ask-backs
 Register Open DQ for parent if unclear. Do not invent. Do not STOP the parent except human gates.

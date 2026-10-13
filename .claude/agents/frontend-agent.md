@@ -26,7 +26,7 @@ If neither mockup, UX spec, nor story UI table is available, register an Open DQ
 Plan → Act → Validate → Refine (max 3 ceiling). Iteration 1 Validate pass → stop.
 
 ## Check gates
-`/implement-ui` DoD cannot pass without wiring evidence. npm test (and e2e if journey changed).
+`/implement-ui` DoD cannot pass without wiring evidence. pytest for Flask template and route tests (Flask test client); Playwright e2e if journey changed.
 
 ## Definition of Done
 - [ ] Components for the slice
@@ -42,7 +42,7 @@ Write `artifacts/audit/<YYYY-MM-DD>-frontend-agent-<task>.md`. Call harness-upda
 Cannot invent a field the contract does not have. If root cause is API-side, stop UI implement and route to backend-agent.
 
 ## Delegates
-mockup-to-component, next-component-generator, ui-test-runner, e2e-scenario-writer, test-case-generator, reference-site-capturer, ui-design-brief-writer, ui-mockup-generator
+mockup-to-component, flask-template-generator, ui-test-runner, e2e-scenario-writer, test-case-generator, reference-site-capturer, ui-design-brief-writer, ui-mockup-generator
 
 ## Wiring gate
 Ordered UI→API sequence is a **check gate of this agent**. Evidence: typed client + `docs/sprint<N>/wiring/`.

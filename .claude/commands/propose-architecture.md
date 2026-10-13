@@ -19,7 +19,7 @@ Structured **tech-stack** Q&A (with recommendations) → high-level **architectu
 - `@story_artifact` (techno-functional pack)
 - Prior ADRs under `docs/architecture/`
 - `cloud_target` (azure / aws / gcp / on-prem / hybrid)
-- `stack_preference` (e.g. python+react, java+next)
+- `stack_preference` (e.g. python+flask)
 - Compliance tags (e.g. SOC2, PCI — cite; do not assume HIPAA)
 - Existing repo layout or `.claude/config.yaml` when present
 

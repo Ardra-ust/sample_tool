@@ -1,0 +1,25 @@
+%% Logical topology — ai-news-agent (proposal, Proposed — Pending Architecture Review)
+flowchart LR
+    Viewer["Browser: Viewer / Refresh user"]
+    subgraph WEB["Flask web service (modules/api)"]
+        Routes["Routes and services<br/>JSON API + page rendering"]
+        Worker_Start["Refresh start<br/>atomic status lock"]
+    end
+    Templates["Jinja templates + static<br/>(modules/ui)"]
+    Worker["Refresh worker<br/>refresh_worker.py (12 stages)"]
+    WebJob["Azure WebJob<br/>(optional)"]
+    MySQL[("MySQL: news_app<br/>snapshot + status")]
+    AOAI["Azure OpenAI<br/>chat + embeddings"]
+    Sources["News sources<br/>RSS (42), Google News RSS (25),<br/>SearchAPI.io, Tavily"]
+
+    Viewer -->|"HTTPS / HTML pages"| Routes
+    Routes -->|"renders via template_folder"| Templates
+    Viewer -->|"JSON: /api/news, /api/refresh/status"| Routes
+    Viewer -->|"POST /api/refresh"| Worker_Start
+    Worker_Start -->|"subprocess start"| Worker
+    Worker_Start -.->|"HTTP call, only if AZURE_WEBJOB_TRIGGER_URL set"| WebJob
+    WebJob -.->|"starts"| Worker
+    Worker -->|"HTTP pull (RSS / REST)"| Sources
+    Worker -->|"HTTPS REST: chat and embeddings"| AOAI
+    Worker -->|"SQL: snapshot rows, status record"| MySQL
+    Routes -->|"SQL: latest snapshot, status"| MySQL

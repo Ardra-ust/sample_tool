@@ -1,6 +1,6 @@
 # Business Requirements Document — AI News Agent
 
-> Status: **Draft — Pending Domain Review** (v0.2). v0.1 was accepted by Ardra Arun on 2026-10-13. v0.2 adds the LLM stage specification (§17) and FR-046 to FR-048, and needs re-acceptance before it is treated as current.
+> Status: **Accepted** — v0.2, accepted by Ardra Arun on 2026-10-13 (human review). v0.1 was accepted on 2026-10-13 as well. v0.2 adds the LLM stage specification (§17) and FR-046 to FR-048.
 > Source of truth: `artifacts/intake/supporting/ai-news-agent-notes.md`. `§` references below point to that file unless marked otherwise.
 > Open items are in §14 as DQ-xxx. Nothing here is invented: where the notes are silent, the item is a DQ, not a requirement.
 
@@ -10,7 +10,7 @@
 | **Version** | 0.2 |
 | **Date** | 2026-10-13 |
 | **Author** | requirements-agent |
-| **Status** | Draft — Pending Domain Review (v0.2; re-acceptance needed; v0.1 accepted 2026-10-13) |
+| **Status** | Accepted — Ardra Arun, 2026-10-13 (v0.2) |
 | **Module / context** | `ai-news-agent` / `news-intelligence` |
 | **Sources** | `artifacts/intake/supporting/ai-news-agent-notes.md` (primary); intake notes `artifacts/intake/2026-10-13-intake-notes.md` |
 
@@ -372,7 +372,7 @@ Points recorded from the owner file:
 ## Governance
 
 - Every FR and BR cites `source_path` and `source_locator` in the notes. Inferences are marked `[INFERRED]` and tied to a DQ (RISK-003 → DQ-018).
-- The BRD is Accepted by Ardra Arun on 2026-10-13. Acceptance was given by a human reviewer; no agent approved it.
+- The BRD v0.2 is Accepted by Ardra Arun on 2026-10-13. Acceptance was given by a human reviewer; no agent approved it.
 - Conflicts are resolved only by owner answers, recorded in §14.1. Departures from the notes are listed there: the stale-lock limit (70 minutes, DQ-018), no empty snapshot (DQ-018), and the chat model, set by `AZURE_OPENAI_CHAT_DEPLOYMENT` (DQ-A3).
 
 **Output path:** `artifacts/brd/ai-news-agent-BRD-draft.md`

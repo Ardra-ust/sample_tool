@@ -15,10 +15,10 @@
 
 | Suite | Command | Total | Pass | Fail | Skip | Duration | Verdict |
 |-------|---------|-------|------|------|------|----------|---------|
-| API unit | backend unit-test command (per techstack.md, e.g. `pytest` (or `mvn test` for a Java stack)) | | | | | | |
+| API unit | `pytest --cov` (per techstack.md) | | | | | | |
 | API IT | | | | | | | |
-| UI unit | `npm test` | | | | | | |
-| E2E | `npm run test:e2e` | | | | | | see e2e template |
+| UI unit | `pytest` (Flask template/route tests) | | | | | | |
+| E2E | `npx playwright test` | | | | | | see e2e template |
 
 ## Coverage (if collected)
 

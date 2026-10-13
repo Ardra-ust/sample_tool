@@ -27,10 +27,10 @@
   "owner_answers_2026_10_13": {
     "UD-01": "answered: show Updated timestamp from fetched_at",
     "UD-02": "answered: show See more control",
-    "UD-03": "open: lavender outline for IT-services-aligned news may be an out-of-scope UST alignment feature; priority display not stated",
+    "UD-03": "decided 2026-10-13: blue marker only, no lavender outline. Flag: 'aligned' rule undefined and may be out of scope (FR-033, BRD §2)",
     "UD-04": "partly answered: error copy 'No news loaded, check your connection'; loading wording open",
-    "UD-05": "open: UST logo; file not in repo, permission to use not confirmed"
+    "UD-05": "deferred 2026-10-13: proceed with [Logo] placeholder"
   },
-  "open_items": ["UD-03", "UD-04", "UD-05"],
+  "open_items": ["UD-03 (aligned rule definition, owner)", "UD-04 (loading wording, owner)"],
   "copy_policy": "BRD wording only; article content and unknown labels are [Label] placeholders."
 }

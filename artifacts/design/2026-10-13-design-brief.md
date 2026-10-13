@@ -54,9 +54,11 @@ Also covered: FR-026 (card grid), FR-027 (sort: "Priority (High to Low)" and "Da
 | Error copy | "No news loaded, check your connection" | Used for the error state (see States). |
 | Logo | UST logo | **Placeholder kept.** See below. |
 
-**Open: lavender outline (UD-03).** A marker for news "more aligned with IT company services" looks like the UST alignment or relevance feature. The BRD puts that out of scope (§2 "UST relevance, UST alignment score"; FR-033). Confirm whether the outline is in scope before `/implement-ui` builds it. The priority number isn't mentioned, so it stays out of the mockup.
+**Decided (UD-03, owner, 2026-10-13): no lavender outline. Use a blue marker only** to show news aligned with IT services companies. The lavender outline is dropped.
 
-**Open: logo (UD-05).** The command says not to copy trademarked assets verbatim. The owner has named the UST logo, but the logo file is not in the repo. Send the logo file, and confirm it may be used, and the header will use it. Until then the header shows `[Logo]`.
+**Flag for the owner:** the BRD does not define "aligned with IT services companies". A marker for it is close to the UST alignment feature, which §2 and FR-033 put out of scope. Before `/implement-ui` builds the marker, the owner needs to state the rule for "aligned" and confirm that the marker is in scope. The priority number isn't mentioned, so it stays out of the mockup.
+
+**Deferred (UD-05, owner, 2026-10-13): proceed without the logo.** The header keeps the `[Logo]` placeholder. The command says not to copy trademarked assets verbatim, and the logo file is not in the repo. Add the logo later, once the file and permission to use it are provided.
 
 ## States (described, not drawn)
 
@@ -71,13 +73,13 @@ Also covered: FR-026 (card grid), FR-027 (sort: "Priority (High to Low)" and "Da
 |----|----------|-------|---------------------------|
 | UD-01 | "Updated" timestamp from `fetched_at` | Owner | Answered (yes) |
 | UD-02 | "See more..." control | Owner | Answered (yes) |
-| UD-03 | Lavender outline for news aligned with IT company services; priority display not stated | Owner | **Open.** Confirm whether the outline is in scope (possible UST alignment feature, out of scope). |
+| UD-03 | Marker for IT-services-aligned news | Owner | **Decided:** blue marker only; no lavender outline. **Flag:** the "aligned" rule is undefined and may be out of scope (see above). |
 | UD-04 | Loading wording (NFR-007) | Owner (name needed) | No. Error wording answered. |
-| UD-05 | UST logo file and permission to use it | Owner (name needed) | **Open.** Logo file needed. |
+| UD-05 | UST logo file and permission to use it | Owner | **Deferred:** proceed with `[Logo]` placeholder. |
 
-UD-03 and UD-05 are not blocking `/implement-ui`: it can build the grid, timestamp and see-more control now. The outline and the logo can follow once answered.
+`/implement-ui` can proceed with the grid, timestamp, see-more control, and the blue marker. The "aligned" rule still needs an owner definition before the marker is built.
 
 ## Notes
 
 - The mockup's deal-type counts show "(0)" as placeholders. Real counts come from the snapshot.
-- The mockup shows a `Priority [1-5]` tag only as a placeholder for UD-03.
+- The mockup shows a `Priority [1-5]` tag as a placeholder. The owner has not confirmed that priority numbers appear on cards.

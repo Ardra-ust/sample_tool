@@ -10,7 +10,7 @@ After `/implement-api` for the same sprint item, or when the item is UI-only wit
 | Phase | Role | Agent / Subagent |
 |-------|------|------------------|
 | 1 Layout | If mockup/sketch | mockup-to-component |
-| 2 Components | Primary | frontend-agent + next-component-generator |
+| 2 Components | Primary | frontend-agent + flask-template-generator |
 | 3 Wiring | Required gate | frontend-agent (wiring check gate) |
 | 4a Cases | Design | test-case-generator + e2e-scenario-writer (if journey changed) → `docs/test-cases.md` + matrix |
 | 4b Coverage gate | Required | quality-agent → br-coverage-validator (`pre-script`). Only writer of `docs/test-cases-br-coverage.md`. FAIL → expand cases; do not run |
@@ -23,7 +23,7 @@ A flowchart/whiteboard is **not** a page — run `/generate-ui-design` with a re
 Plan
  → Act
  → mockup-to-component or UX spec
- → next-component-generator
+ → flask-template-generator
  → frontend-agent wiring gate
  → test-case-generator [+ e2e-scenario-writer if journey changed]
  → test-cases-br-coverage gate (PASS required)
@@ -67,7 +67,7 @@ After resolve-before-ask, if neither mockup (including `/generate-ui-design` out
 - [ ] Wiring gate passed (typed client, ordered sequence, traceability)
 - [ ] `docs/test-cases.md` + matrix include the UI slice
 - [ ] `docs/test-cases-br-coverage.md` Status **PASS** before runners
-- [ ] UI unit/component tests run (`npm test` or project equivalent)
+- [ ] UI unit/component tests run (`pytest` for Flask template/route tests)
 - [ ] E2E if journey changed
 - [ ] `artifacts/audit/<date>-implement-ui-<task>.md` written
 - [ ] Harness updated (phase-changing)

@@ -1,13 +1,13 @@
 # mockup-to-component
 
 ## Purpose
-PNG / screenshot / Figma **node image** / feature.md → layout resolution for `next-component-generator`. Screen UI only.
+PNG / screenshot / Figma **node image** / feature.md → layout resolution for `flask-template-generator`. Screen UI only.
 
 ## Parent
 frontend-agent (`/generate-ui-design`, `/implement-ui`)
 
 ## Must / Must NOT
-- Must: inventory regions, labels, hierarchy; flag illegible text; pass structured layout to next-component-generator.
+- Must: inventory regions, labels, hierarchy; flag illegible text; pass structured layout to flask-template-generator.
 - Must NOT: invent copy; treat a flowchart as a page (whiteboard skill); extract a full design system (`/generate-ui-design`).
 
 ## Inputs

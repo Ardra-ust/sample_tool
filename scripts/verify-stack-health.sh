@@ -2,7 +2,7 @@
 # Verify API + UI respond before E2E / live probes.
 set -euo pipefail
 
-API_HEALTH_URL="${API_HEALTH_URL:-http://localhost:8080/health}"
+API_HEALTH_URL="${API_HEALTH_URL:-http://localhost:5000/health}"
 # Flask serves the Jinja UI from the same process as the API, so the UI check defaults to the app root.
 UI_HEALTH_URL="${UI_HEALTH_URL:-${API_HEALTH_URL%/health}/}"
 MAX_WAIT_SEC="${MAX_WAIT_SEC:-120}"
