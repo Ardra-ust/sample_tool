@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Latest Tech News</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}">
+  <script src="{{ url_for('static', filename='js/news.js') }}" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <h1>Latest Tech News</h1>
+  </header>
+
+  <main class="page">
+    <div class="toolbar">
+      <span id="updated" class="updated" hidden></span>
+
+      <label class="control">
+        <span>Sort by</span>
+        <select id="sort">
+          <option value="priority">Priority (High to Low)</option>
+          <option value="date">Date (Newest to Oldest)</option>
+        </select>
+      </label>
+
+      <label class="control">
+        <span>Filter by domain</span>
+        <select id="domain">
+          <option value="All">All</option>
+          <option value="Healthcare">Healthcare</option>
+          <option value="Retail">Retail</option>
+          <option value="Banking and Financial Services">Banking and Financial Services</option>
+          <option value="Technology &amp; Communication">Technology &amp; Communication</option>
+          <option value="Wealth &amp; Asset Management">Wealth &amp; Asset Management</option>
+        </select>
+      </label>
+
+      <button id="refresh" type="button" class="button primary">Refresh News</button>
+    </div>
+
+    <div class="deal-filter" aria-label="Filter by deal type">
+      <span class="deal-label">Filter by deal type</span>
+      <div id="deal-chips" class="deal-chips"></div>
+      <button id="clear-deal" type="button" class="link-button">Clear filter</button>
+    </div>
+
+    <p id="notice" class="notice" role="status" hidden></p>
+    <div id="loading" class="loading" aria-busy="true" hidden></div>
+    <div id="grid" class="grid"></div>
+    <p id="empty" class="empty" hidden>No news found</p>
+  </main>
+
+  <footer class="site-footer">Copyright 2025 UST</footer>
+</body>
+</html>
