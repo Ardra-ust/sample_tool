@@ -1,0 +1,240 @@
+openapi: 3.1.0
+info:
+  title: AI News Agent API
+  version: 1.0.0
+  description: >
+    Routes for the AI News Agent (BRD §5, §8). Source of truth for API shape (stack-conventions.md).
+    No authentication in this build (DQ-020; known risk RISK-A1). Add authentication before the tool
+    is exposed beyond a trusted network. Error response bodies are not defined by the sources; see
+    the x-open-questions extension at the end of this file.
+servers:
+  - url: http://localhost:5000
+    description: Local run (Flask on port 5000; DQ-021).
+tags:
+  - name: pages
+    description: Server-rendered pages (Jinja templates in modules/ui).
+  - name: news
+    description: Latest stored snapshot.
+  - name: refresh
+    description: Manual refresh and its status.
+  - name: health
+    description: Health check.
+
+paths:
+  /:
+    get:
+      tags: [pages]
+      operationId: getIndexPage
+      summary: News grid page
+      description: Renders index.html with the latest snapshot. Sort, domain and deal-type filters are client-side.
+      responses:
+        "200":
+          description: HTML page.
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /api/news:
+    get:
+      tags: [news]
+      operationId: getNews
+      summary: Latest snapshot
+      description: >
+        Returns the latest stored snapshot (FR-034). When no snapshot exists, returns count 0 and an
+        empty results list. Times are IST (NFR-003). Responses send no-cache headers (NFR-002).
+      responses:
+        "200":
+          description: Latest snapshot.
+          headers:
+            Cache-Control:
+              $ref: "#/components/headers/NoCache"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewsResponse"
+              examples:
+                empty:
+                  value: { count: 0, results: [], fetched_at: null }
+
+  /api/refresh:
+    post:
+      tags: [refresh]
+      operationId: startRefresh
+      summary: Start a manual refresh
+      description: >
+        If a refresh is running, returns status running (BR-015). Otherwise takes the atomic lock,
+        starts the refresh worker (FR-039), and returns status started. If the start fails, the failure
+        is recorded and the response is HTTP 500 (FR-036). No authentication in this build (DQ-020).
+      responses:
+        "200":
+          description: Refresh started or already running.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RefreshStartResponse"
+        "500":
+          description: The refresh could not be started. The failure is recorded in the status record (FR-036). Error body not defined (see x-open-questions).
+
+  /api/refresh/status:
+    get:
+      tags: [refresh]
+      operationId: getRefreshStatus
+      summary: Refresh status
+      description: Used by the UI to poll until a refresh finishes (FR-030, FR-037). No-cache headers.
+      responses:
+        "200":
+          description: Current status.
+          headers:
+            Cache-Control:
+              $ref: "#/components/headers/NoCache"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RefreshStatus"
+
+  /health:
+    get:
+      tags: [health]
+      operationId: getHealth
+      summary: Health check
+      description: Returns OK when the service is up (FR-038; used by scripts/verify-stack-health.sh).
+      responses:
+        "200":
+          description: Service is up.
+          content:
+            text/plain:
+              schema:
+                type: string
+                const: OK
+
+components:
+  headers:
+    NoCache:
+      description: Disables caching of the response.
+      schema:
+        type: string
+        const: no-cache
+
+  schemas:
+    DomainName:
+      type: string
+      description: One of five domains, or Unknown only when the AI classification call fails or returns no domain (DQ-005).
+      enum:
+        - Healthcare
+        - Retail
+        - Banking and Financial Services
+        - Technology & Communication
+        - Wealth & Asset Management
+        - Unknown
+
+    DealType:
+      type: string
+      description: Deal-type key (BRD §6.3).
+      enum:
+        - mergers_acquisitions
+        - partnerships
+        - joint_ventures
+        - strategic_investments
+        - spin_offs_divestitures
+        - alliances
+
+    Article:
+      type: object
+      description: One stored article (BRD FR-024; field rules per DQ-017).
+      required:
+        - title
+        - link
+        - source
+        - published
+        - summary
+        - domain
+        - priority
+        - deal_categories
+        - is_deal_news
+        - is_google_news
+        - published_at
+      properties:
+        title:
+          type: string
+        link:
+          type: string
+          description: Publisher URL (Google News wrapper links are decoded, FR-006).
+        source:
+          type: string
+        published:
+          type: string
+          description: IST, YYYY-MM-DD HH:MM:SS (or YYYY-MM-DD if only a date is known).
+        summary:
+          type: string
+          description: Cut to the length in FR-001 to FR-003; HTML stripped (NFR-009).
+        domain:
+          $ref: "#/components/schemas/DomainName"
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 5
+          description: 1 to 5 after boosts, capped at 5 (BR-007 to BR-010).
+        deal_categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/DealType"
+        is_deal_news:
+          type: boolean
+          description: True when deal_categories is non-empty (DQ-017).
+        is_google_news:
+          type: boolean
+        published_at:
+          type: string
+          description: Copy of published (DQ-017).
+
+    NewsResponse:
+      type: object
+      required: [count, results, fetched_at]
+      properties:
+        count:
+          type: integer
+          minimum: 0
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/Article"
+        fetched_at:
+          type: [string, "null"]
+          description: IST timestamp of the snapshot; null when no snapshot exists.
+
+    RefreshStartResponse:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [started, running]
+
+    RefreshStatus:
+      type: object
+      required: [running]
+      properties:
+        running:
+          type: boolean
+        started_at:
+          type: [string, "null"]
+          description: IST timestamp.
+        finished_at:
+          type: [string, "null"]
+          description: IST timestamp; set when a run ends (FR-040).
+        message:
+          type: [string, "null"]
+        last_run_type:
+          type: [string, "null"]
+          description: Type of the last run (value set by the worker).
+
+x-open-questions:
+  - id: OQ-API-1
+    question: Error response body for HTTP 500 from POST /api/refresh and any other error envelope policy. The sources do not define one.
+    owner: Owner (name needed)
+    blocking: false
+  - id: OQ-API-2
+    question: Value set for last_run_type (for example manual, webjob). The sources do not name the values.
+    owner: Owner (name needed)
+    blocking: false
