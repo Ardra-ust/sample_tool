@@ -1,0 +1,22 @@
+# Pinned to the versions installed and tested for S1 (2026-10-13). Groq is excluded by owner decision.
+# Web and test
+Flask==3.1.2
+pytest==9.1.1
+pytest-cov==7.1.0
+# Persistence
+SQLAlchemy==2.0.44
+alembic==1.20.0
+mysql-connector-python==9.5.0
+# Configuration
+python-dotenv==1.2.1
+# Sources and parsing
+feedparser==6.0.12
+requests==2.32.5
+beautifulsoup4==4.14.3
+googlenewsdecoder==0.1.7
+tavily-python==0.7.21
+# Pipeline maths and dates
+numpy==2.2.6
+python-dateutil==2.9.0.post0
+# Azure OpenAI chat and embeddings
+openai==2.14.0

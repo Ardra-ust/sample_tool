@@ -1,0 +1,12 @@
+# Secrets: never commit the real environment file (G-08)
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
