@@ -1,0 +1,10 @@
+Return ONLY valid JSON in this exact schema:
+{
+  "results": [
+    {"index": 0, "categories": ["mergers_acquisitions"]},
+    {"index": 1, "categories": []}
+  ]
+}
+
+Articles:
+{items_json}

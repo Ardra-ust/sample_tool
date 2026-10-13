@@ -1,0 +1,8 @@
+Return ONLY valid JSON.
+Schema:
+{
+  "keep_indices": [0, 2]
+}
+
+Titles:
+{titles_json}
