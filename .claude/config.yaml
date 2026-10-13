@@ -1,13 +1,11 @@
 project:
-  name: "<project-name>"
-  domain: "<bounded-context>"
+  name: "ai-news-agent"
+  domain: "news-intelligence"
 
 modules:
-  api: "<api-module-root>"
-  ui: "<ui-module-root>"
-  openapi: "contracts/openapi/<service>-v1.yaml"
-  python: "<python-module-root>"   # optional
-  infra: "infra/terraform"         # optional
+  api: "modules/api"
+  ui: "modules/api"
+  openapi: "contracts/openapi/ai-news-agent-v1.yaml"
 
 intake:
   transcripts: artifacts/intake/transcripts/
@@ -57,21 +55,20 @@ pipeline:
   eval_fix_command: close-eval-gaps
 
 local_stack:
-  api_health_url: "http://localhost:8080/health"
-  ui_health_url: "http://localhost:3000"
+  api_health_url: "http://localhost:5000/health"
+  ui_health_url: "http://localhost:5000/"
   start_script: "scripts/run-local-stack.sh"
   verify_script: "scripts/verify-stack-health.sh"
   stop_script: "scripts/stop-local-stack.sh"
 
 evals:
   root: evals/product
-  rule_source: artifacts/brd/<module>-BRD.md   # or story pack path
+  rule_source: ""   # left blank for now
   rule_id_pattern: "(FR|BR|NFR|INT)-[0-9]+"
   status: evals/product/STATUS.md
   results: evals/product/results/
   factory_root: evals/factory
   test_commands:
-    api: "cd <api-module-root> && pytest"
-    # Flask template/route tests run in the API pytest suite (no npm step)
-    ui: "cd <api-module-root> && pytest"
-    e2e: "cd <ui-module-root> && npm run test:e2e"
+    api: "cd modules/api && pytest --cov"
+    ui: "cd modules/api && pytest"
+    e2e: "cd modules/api && npx playwright test"
